@@ -1,5 +1,7 @@
 import 'package:book_app/pages/download_history.dart';
+import 'package:book_app/pages/favorites_page.dart';
 import 'package:book_app/pages/profile.dart';
+import 'package:book_app/pages/search_page.dart';
 import 'package:book_app/pages/signin.dart';
 import 'package:book_app/pages/signup.dart';
 import 'package:book_app/resources/routes.dart';
@@ -18,13 +20,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.signup,
+      initialRoute: Routes.home,
       routes: {
         Routes.signup: (context) => const Signup(),
         Routes.signin: (context) => const Signin(),
         Routes.home: (context) => const Home(),
         Routes.profile: (context) => const ProfilePage(),
-        Routes.downloadHistory: (context) => const DownloadHistoryPage()
+        Routes.downloadHistory: (context) => const DownloadHistoryPage(),
+        Routes.favourites: (context) => const FavoritesPage(),
+        Routes.searchResult: (context) => const SearchPage()
       },
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -43,11 +47,58 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 5)).then((value) {
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(
+        builder: (BuildContext context) => const Signup(),
+      ));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("data"),
+      body: Container(
+        padding: EdgeInsets.only(top: 190),
+        color: Colors.blue,
+        child: Center(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(children: [
+              // Image(image: AssetImage('assets/Book.svg')),
+              SvgPicture.asset("assets/Book.svg"),
+              const SizedBox(
+                height: 100,
+              ),
+              const Text(
+                "Book App",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500),
+              ),
+              const Text(
+                "by AKNY",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300),
+              )
+            ]),
+          ),
+        ),
       ),
     );
   }
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text("data"),
+    ),
+  );
 }
