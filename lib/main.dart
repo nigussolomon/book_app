@@ -1,5 +1,8 @@
+import 'package:book_app/pages/download_history.dart';
+import 'package:book_app/pages/profile.dart';
 import 'package:book_app/pages/signin.dart';
 import 'package:book_app/pages/signup.dart';
+import 'package:book_app/resources/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,17 +18,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: Routes.signup,
+      routes: {
+        Routes.signup: (context) => const Signup(),
+        Routes.signin: (context) => const Signin(),
+        Routes.home: (context) => const Home(),
+        Routes.profile: (context) => const ProfilePage(),
+        Routes.downloadHistory: (context) => const DownloadHistoryPage()
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      
-      home: const Signup(),
-      
     );
   }
 }
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
