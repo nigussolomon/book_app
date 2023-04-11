@@ -36,11 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const Home(),
-      ));
-    });
+    // Future.delayed(const Duration(seconds: 5)).then((value) {
+    //   Navigator.of(context).pushReplacement(CupertinoPageRoute(
+    //     builder: (BuildContext context) => const Home(),
+    //   ));
+    // });
   }
 
   @override
@@ -48,29 +48,32 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top: 190),
-        color: Colors.blue,
+        color: Color.fromARGB(255, 89, 173, 250),
         child: Center(
           child: SizedBox(
             width: double.infinity,
             child: Column(children: [
               // Image(image: AssetImage('assets/Book.svg')),
-              SvgPicture.asset("assets/Book.svg"),
+              SvgPicture.asset(
+                "assets/Book.svg",
+                color: Colors.white,
+              ),
               const SizedBox(
-                height: 100,
+                height: 60,
               ),
               const Text(
-                "Book App",
+                "BOOK APP",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w700),
               ),
               const Text(
                 "by AKNY",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
-                    fontWeight: FontWeight.w300),
+                    fontWeight: FontWeight.w200),
               )
             ]),
           ),
