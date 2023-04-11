@@ -20,118 +20,90 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Center(
-                child: SvgPicture.asset(
-              "assets/Book.svg",
-              width: 100,
-              height: 100,
-            )),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "Sign up",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(25, 25))),
-                    hintText: 'Enter your name',
-                    labelText: "Name"),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: const TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(25, 25))),
-                    hintText: 'Enter your email',
-                    labelText: "Email"),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                obscureText: passwordVisible,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(25, 25))),
-                  hintText: 'Choose a Password',
-                  labelText: "Password",
-                  helperText: "Password must contain special character",
-                  helperStyle: const TextStyle(color: Colors.lightBlue),
-                  suffixIcon: IconButton(
-                    icon: Icon(passwordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off),
-                    onPressed: () {
-                      setState(
-                        () {
-                          passwordVisible = !passwordVisible;
-                        },
-                      );
-                    },
-                  ),
-                  alignLabelWithHint: false,
-                  filled: true,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(25, 25))),
-                  hintText: 'Confirm your password',
-                  labelText: "Confirm Password",
-                  helperText:
-                      "Password must contain the same character as above",
-                  helperStyle: const TextStyle(color: Colors.lightBlue),
-                  alignLabelWithHint: false,
-                  filled: true,
-                ),
-              ),
-            ),
-            Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
                 height: 100,
-                width: MediaQuery.of(context).size.width,
+              ),
+              const Text(
+                "SIGN UP",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              ),
+              Container(
                 padding: const EdgeInsets.all(20),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ))),
-                  child: const Text("Continue"),
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Already have an account? "),
-                TextButton(onPressed: () {}, child: const Text("Login"))
-              ],
-            )
-          ],
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.elliptical(7, 7))),
+                      hintText: 'Enter your name',
+                      labelText: "Username"),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: const TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.elliptical(7, 7))),
+                      hintText: 'Enter your email',
+                      labelText: "Email"),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  obscureText: passwordVisible,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.all(Radius.elliptical(7, 7))),
+                    hintText: 'Choose a Password',
+                    labelText: "Password",
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: const TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.elliptical(7, 7))),
+                      hintText: 'Confirm your password',
+                      labelText: "Confirmation",
+                    )),
+              ),
+              Container(
+                  height: 90,
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 91, 180, 253)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7.0),
+                        ))),
+                    child: const Text("SIGN UP"),
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Already have an account? "),
+                  TextButton(onPressed: () {}, child: const Text("Sign in"))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
