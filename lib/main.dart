@@ -19,13 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      
-      home: const Signup(),
-      
+      home: const Signin(),
     );
   }
 }
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
