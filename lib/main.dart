@@ -1,3 +1,10 @@
+import 'package:book_app/pages/download_history.dart';
+import 'package:book_app/pages/favorites_page.dart';
+import 'package:book_app/pages/profile.dart';
+import 'package:book_app/pages/search_page.dart';
+import 'package:book_app/pages/signin.dart';
+import 'package:book_app/pages/signup.dart';
+import 'package:book_app/resources/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,34 +20,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: Routes.home,
+      routes: {
+        Routes.signup: (context) => const Signup(),
+        Routes.signin: (context) => const Signin(),
+        Routes.home: (context) => const Home(),
+        Routes.profile: (context) => const ProfilePage(),
+        Routes.downloadHistory: (context) => const DownloadHistoryPage(),
+        Routes.favourites: (context) => const FavoritesPage(),
+        Routes.searchResult: (context) => const SearchPage()
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
-    // Future.delayed(const Duration(seconds: 5)).then((value) {
-    //   Navigator.of(context).pushReplacement(CupertinoPageRoute(
-    //     builder: (BuildContext context) => const Home(),
-    //   ));
-    // });
+    Future.delayed(const Duration(seconds: 5)).then((value) {
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(
+        builder: (BuildContext context) => const Signup(),
+      ));
+    });
   }
 
   @override
@@ -83,20 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("data"),
-      ),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text("data"),
+    ),
+  );
 }
