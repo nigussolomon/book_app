@@ -47,60 +47,90 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
-        margin: const EdgeInsets.all(4),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
         padding: const EdgeInsets.all(4),
-        child: ListView.builder(
-          itemCount: 13,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 150,
-                      height: 150,
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://th.bing.com/th/id/OIP.4zygV7JXARRma1FeXBTxtgAAAA?w=197&h=315&c=7&r=0&o=5&pid=1.7"))),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * .5,
-                      height: 140,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Book Title",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.w800),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Downloads",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .73,
+              child: ListView.builder(
+                itemCount: 13,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 9),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                            border: Border.all(width: 1, color: Colors.black)),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 100,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          "https://th.bing.com/th/id/OIP.4zygV7JXARRma1FeXBTxtgAAAA?w=197&h=315&c=7&r=0&o=5&pid=1.7"))),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * .5,
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              height: 100,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        "Book Title",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                      Text(
+                                        "Book Author",
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text(
+                                    "Lorem ipsum dolor sit amet consectetur. Imperdiet in turpis netus enim aliquam nullam nunc. ",
+                                    style: TextStyle(fontSize: 13),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "Book Author",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                          const Text(
-                              "Lorem ipsum dolor sit amet consectetur. Imperdiet in turpis netus enim aliquam nullam nunc. "),
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                )
-              ],
-            );
-          },
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
