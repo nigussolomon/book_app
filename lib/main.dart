@@ -5,11 +5,14 @@ import 'package:book_app/pages/search_page.dart';
 import 'package:book_app/pages/signin.dart';
 import 'package:book_app/pages/signup.dart';
 import 'package:book_app/resources/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
