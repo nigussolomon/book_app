@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../components/item_card.dart';
+import '../components/top_bar.dart';
+
 class DownloadHistoryPage extends StatefulWidget {
   const DownloadHistoryPage({super.key});
 
@@ -26,22 +29,9 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "BOOK APP",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.person,
-              color: Colors.black,
-            ),
-          )
-        ],
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -51,110 +41,17 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
         padding: const EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
+          children: const [
+            Text(
               "Downloads",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .73,
-              child: ListView.builder(
-                itemCount: 13,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 9),
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5)),
-                            border: Border.all(width: 1, color: Colors.black)),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 100,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          "https://th.bing.com/th/id/OIP.4zygV7JXARRma1FeXBTxtgAAAA?w=197&h=315&c=7&r=0&o=5&pid=1.7"))),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * .5,
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        "Book Title",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w800),
-                                      ),
-                                      Text(
-                                        "Book Author",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                    ],
-                                  ),
-                                  const Text(
-                                    "Lorem ipsum dolor sit amet consectetur. Imperdiet in turpis netus enim aliquam nullam nunc. ",
-                                    style: TextStyle(fontSize: 13),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      )
-                    ],
-                  );
-                },
-              ),
-            ),
+            ItemCard()
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dasboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourites',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }

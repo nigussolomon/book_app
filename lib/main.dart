@@ -1,3 +1,4 @@
+import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
 import 'package:book_app/pages/favorites_page.dart';
 import 'package:book_app/pages/profile.dart';
@@ -48,24 +49,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final books = [
-    {
-      'title': "Some Title",
-      'author': "Unknown Author",
-      'description': 'some description',
-    },
-    {
-      'title': "New Title",
-      "author": "Some Author",
-      'description': "Some description"
-    }
-  ];
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const FavoritesPage(),
+        builder: (BuildContext context) => const Signup(),
       ));
     });
   }
@@ -108,13 +97,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text("data"),
-    ),
-  );
 }
