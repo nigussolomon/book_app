@@ -17,6 +17,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  get book => null;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

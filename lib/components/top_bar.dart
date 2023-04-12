@@ -7,6 +7,7 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       elevation: 0,
       title: const Text(
         "BOOK APP",
