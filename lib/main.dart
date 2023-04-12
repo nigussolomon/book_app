@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -46,12 +48,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final books = [
+    {
+      'title': "Some Title",
+      'author': "Unknown Author",
+      'description': 'some description',
+    },
+    {
+      'title': "New Title",
+      "author": "Some Author",
+      'description': "Some description"
+    }
+  ];
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const Signup(),
+        builder: (BuildContext context) => const FavoritesPage(),
       ));
     });
   }
