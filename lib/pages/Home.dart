@@ -1,187 +1,158 @@
+import "package:book_app/data/book.dart";
+import "package:book_app/data/user.dart";
 import "package:flutter/material.dart";
+import "../components/bottomNavbar.dart";
+import "../components/top_bar.dart";
 import "Details.dart";
 
 class HomePage extends StatelessWidget {
-  final Book book1;
-  final search = TextEditingController();
-  HomePage({Key? key, required this.book1}) : super(key: key);
+  final TextEditingController _searchController = TextEditingController();
+  HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              title: Text(
-                "Books",
-                style: TextStyle(color: Colors.black),
-              ),
-              actions: [
-                Icon(
-                  Icons.people,
-                  color: Colors.black,
-                )
-              ],
-              backgroundColor: Colors.white,
-              elevation: 0,
-            ),
-            body: Container(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(7),
-                  child: TextField(
-                    controller: search,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.elliptical(7, 7))),
-                      hintText: "Search",
-                      labelText: "Search",
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: GridView.builder(
-                      itemCount: books.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 22 * 10,
-                        crossAxisSpacing: 22,
-                        childAspectRatio: 0.7,
-                      ),
-                      itemBuilder: (context, index) => ItemCard(
-                        book: books[index],
-                        // press: () {},
-                        press: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailsScreen(
-                                book21: books[index],
-                              ),
-                            )),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ))));
-  }
-}
-
-class ItemCard extends StatelessWidget {
-  final Book book;
-  final VoidCallback press;
-  // required this.movie, required this.press,
-  ItemCard({
-    required this.book,
-    required this.press,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(22),
-              // height: 170,
-              // width: 150,
-              decoration: BoxDecoration(
-                // color: ,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Hero(tag: "${book.id}", child: Image.asset(book.image)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 22 / 4),
-            child: Text(
-              book.title,
-              style: TextStyle(color: Colors.amber, fontSize: 20),
-            ),
-          ),
-          Text("\$${book.price}",
-              style: TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15)),
-        ],
+    List books = [
+      Book(
+          bookId: 1,
+          downloadUrl: "",
+          bookName: "bookName",
+          bookAuthor: User(
+              uid: 1,
+              firstname: "firstname",
+              lastname: "lastname",
+              email: "email",
+              phonenumber: "phonenumber")),
+      Book(
+          bookId: 1,
+          downloadUrl: "",
+          bookName: "bookName",
+          bookAuthor: User(
+              uid: 1,
+              firstname: "firstname",
+              lastname: "lastname",
+              email: "email",
+              phonenumber: "phonenumber")),
+      Book(
+          bookId: 1,
+          downloadUrl: "",
+          bookName: "bookName",
+          bookAuthor: User(
+              uid: 1,
+              firstname: "firstname",
+              lastname: "lastname",
+              email: "email",
+              phonenumber: "phonenumber"))
+    ];
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
+      body: Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+          padding: const EdgeInsets.all(4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  //prefixIcon: const Icon(Icons.search_outlined),
+                  hintText: 'Search Books here..',
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search_outlined, color: Colors.blue),
+                    onPressed: () => _searchController.clear(),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: GridView.builder(
+                    itemCount: books.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 22,
+                      childAspectRatio: 0.65,
+                    ),
+                    itemBuilder: (context, index) {
+                      Book book = books[index];
+                      return Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                      book21: books[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 180,
+                                height: 200,
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          'https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'),
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                                child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      book.bookName,
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      book.bookAuthor.firstname,
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300),
+                                    )
+                                  ],
+                                ),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.thumb_up))
+                              ],
+                            ))
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          )),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
-
-class Book {
-  final String image, title, description;
-  final num price, time, id;
-  final Color color;
-
-  Book({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.color,
-    required this.time,
-  });
-}
-
-List<Book> books = [
-  Book(
-      id: 1,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 92, 92, 92),
-      time: 130),
-  Book(
-      id: 2,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 138, 117, 117),
-      time: 130),
-  Book(
-      id: 3,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 212, 131, 38),
-      time: 130),
-  Book(
-      id: 4,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 50, 67, 68),
-      time: 130),
-  Book(
-      id: 5,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 51, 49, 49),
-      time: 130),
-  Book(
-      id: 6,
-      image: "assets/images/the_catcher_in_the_rye.jpg",
-      title: "The Catcher in the rye",
-      price: 20,
-      description: "dummyText",
-      color: Color.fromARGB(255, 231, 103, 43),
-      time: 130)
-];
