@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../resources/routes.dart';
+
 class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+  final int index;
+  const BottomBar({super.key, required this.index});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -10,14 +13,18 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
+  List routes = [Routes.home, Routes.downloadHistory, Routes.favourites];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      Navigator.popAndPushNamed(context, routes[index]);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _selectedIndex = widget.index;
     return BottomNavigationBar(
       backgroundColor: Colors.white,
       elevation: 50,

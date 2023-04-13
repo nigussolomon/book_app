@@ -1,3 +1,4 @@
+import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
 
 import '../components/item_card.dart';
@@ -11,20 +12,6 @@ class DownloadHistoryPage extends StatefulWidget {
 }
 
 class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page'),
-    Text('History Page'),
-    Text('Favourites Page'),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +39,9 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
             ItemCard()
           ],
         ),
+      ),
+      bottomNavigationBar: const BottomBar(
+        index: 1,
       ),
     );
   }

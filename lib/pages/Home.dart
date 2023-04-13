@@ -1,5 +1,6 @@
 import "package:book_app/data/book.dart";
 import "package:book_app/data/user.dart";
+import "package:book_app/resources/routes.dart";
 import "package:flutter/material.dart";
 import "../components/bottomNavbar.dart";
 import "../components/top_bar.dart";
@@ -68,7 +69,9 @@ class HomePage extends StatelessWidget {
                   hintText: 'Search Books here..',
                   suffixIcon: IconButton(
                     icon: Icon(Icons.search_outlined, color: Colors.blue),
-                    onPressed: () => _searchController.clear(),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.searchResult);
+                    },
                   ),
                 ),
               ),
@@ -152,7 +155,9 @@ class HomePage extends StatelessWidget {
               ),
             ],
           )),
-      bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: const BottomBar(
+        index: 0,
+      ),
     );
   }
 }

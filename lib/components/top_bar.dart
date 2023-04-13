@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../resources/routes.dart';
+
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
 
@@ -15,7 +17,9 @@ class TopBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.profile);
+          },
           icon: const Icon(
             Icons.person,
             color: Colors.black,
