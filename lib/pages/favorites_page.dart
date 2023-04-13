@@ -1,3 +1,4 @@
+import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
 import '../components/item_card.dart';
 import '../components/top_bar.dart';
@@ -37,6 +38,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
             ItemCard(),
           ],
         ),
+      ),
+      bottomNavigationBar: const BottomBar(
+        index: 2,
       ),
     );
   }

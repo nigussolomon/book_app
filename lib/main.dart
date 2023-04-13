@@ -23,11 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.home,
+      initialRoute: 'splash',
       routes: {
+        'splash': (context) => Home(),
         Routes.signup: (context) => const Signup(),
         Routes.signin: (context) => const Signin(),
-        Routes.home: (context) => const Home(),
+        Routes.home: (context) => HomePage(),
         Routes.profile: (context) => const ProfilePage(),
         Routes.downloadHistory: (context) => const DownloadHistoryPage(),
         Routes.favourites: (context) => const FavoritesPage(),
@@ -36,7 +37,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
     );
