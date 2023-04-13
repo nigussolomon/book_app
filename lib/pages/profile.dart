@@ -80,15 +80,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         minimumSize:
-                            Size(MediaQuery.of(context).size.width * .2, 50)),
-                    label: const Text("DELETE"),
+                            Size(MediaQuery.of(context).size.width * .15, 50)),
+                    label: const Text(""),
                     icon: const Icon(Icons.delete)),
                 ElevatedButton.icon(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize:
-                          Size(MediaQuery.of(context).size.width * .2, 50)),
+                          Size(MediaQuery.of(context).size.width * .15, 50)),
                   label: const Text("ADD BOOK"),
                   icon: const Icon(Icons.add),
                 ),
@@ -101,8 +101,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       minimumSize:
-                          Size(MediaQuery.of(context).size.width * .2, 50)),
-                  label: const Text("Logout"),
+                          Size(MediaQuery.of(context).size.width * .15, 50)),
+                  label: const Text(""),
                   icon: const Icon(Icons.logout_outlined),
                 )
               ],
