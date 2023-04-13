@@ -6,11 +6,16 @@ import 'package:book_app/pages/search_page.dart';
 import 'package:book_app/pages/signin.dart';
 import 'package:book_app/pages/signup.dart';
 import 'package:book_app/resources/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'auth_check.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -56,7 +61,7 @@ class _HomeState extends State<Home> {
     super.initState();
     Future.delayed(const Duration(seconds: 5)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const Signup(),
+        builder: (BuildContext context) => const AuthCheck(),
       ));
     });
   }

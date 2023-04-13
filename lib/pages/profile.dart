@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/top_bar.dart';
@@ -103,7 +104,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: const Text("ADD BOOK"),
                 ),
               ],
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+              child: const Text("Logout"),
+            ),
           ],
         ),
       ),
