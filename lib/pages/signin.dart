@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../resources/routes.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -35,6 +38,7 @@ class _SigninState extends State<Signin> {
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                 child: TextFormField(
+                  controller: emailController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
@@ -46,6 +50,7 @@ class _SigninState extends State<Signin> {
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: passwordVisible,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
@@ -61,7 +66,25 @@ class _SigninState extends State<Signin> {
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text)
+                          .then((value) {
+                        Navigator.of(context).popAndPushNamed(Routes.home);
+                      }).onError((error, stackTrace) {
+                        print("Error ${error.toString()}");
+                        Fluttertoast.showToast(
+                            msg: error.toString(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      });
+                    },
                     style: ButtonStyle(
                         backgroundColor: const MaterialStatePropertyAll(
                             Color.fromARGB(255, 91, 180, 253)),
@@ -76,12 +99,15 @@ class _SigninState extends State<Signin> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Doesn't have an account? "),
-                  TextButton(onPressed: () {}, child: const Text("Sign up"))
+                  TextButton(
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, Routes.signup);
+                      },
+                      child: const Text("Sign up"))
                 ],
               )
             ],
           ),
-
         ),
       ),
     );

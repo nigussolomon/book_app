@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -100,6 +101,14 @@ class _SignupState extends State<Signup> {
                         Navigator.of(context).pushNamed('/');
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");
+                        Fluttertoast.showToast(
+                            msg: error.toString(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                       });
                     },
                     style: ButtonStyle(
