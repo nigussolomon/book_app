@@ -82,7 +82,7 @@ class DetailsScreen extends StatelessWidget {
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                       minimumSize:
-                          Size(MediaQuery.of(context).size.width * .65, 50)),
+                          Size(MediaQuery.of(context).size.width * .55, 50)),
                   onPressed: () {},
                   icon: const Icon(Icons.download),
                   label: const Text("DOWNLOAD BOOK"),

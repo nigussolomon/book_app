@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 22,
-                      childAspectRatio: 0.65,
+                      childAspectRatio: 0.6,
                     ),
                     itemBuilder: (context, index) {
                       Book book = books[index];
@@ -188,7 +188,7 @@ class HomePage extends StatelessWidget {
                               },
                               child: Container(
                                 width: 180,
-                                height: 200,
+                                height: 160,
                                 decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
