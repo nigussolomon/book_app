@@ -30,6 +30,8 @@ class DetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   image: DecorationImage(
                     fit: BoxFit.cover,
+                    colorFilter:
+                        ColorFilter.mode(Colors.black54, BlendMode.darken),
                     image: NetworkImage(
                         'https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'),
                   )),
