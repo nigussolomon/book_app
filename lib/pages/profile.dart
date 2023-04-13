@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../components/top_bar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -26,21 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "BOOK APP",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
-              ))
-        ],
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
       body: Container(
         color: Colors.white,
@@ -113,7 +104,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: const Text("ADD BOOK"),
                 ),
               ],
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+              child: const Text("Logout"),
+            ),
           ],
         ),
       ),

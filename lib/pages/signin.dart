@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Signin extends StatefulWidget {
@@ -9,6 +10,8 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   bool passwordVisible = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -78,6 +81,7 @@ class _SigninState extends State<Signin> {
               )
             ],
           ),
+
         ),
       ),
     );
