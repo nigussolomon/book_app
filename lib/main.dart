@@ -1,3 +1,4 @@
+import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
 import 'package:book_app/pages/favorites_page.dart';
 import 'package:book_app/pages/profile.dart';
@@ -19,15 +20,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  get book => null;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.home,
+      initialRoute: 'splash',
       routes: {
+        'splash': (context) => Home(),
         Routes.signup: (context) => const Signup(),
         Routes.signin: (context) => const Signin(),
-        Routes.home: (context) => const Home(),
+        Routes.home: (context) => HomePage(),
         Routes.profile: (context) => const ProfilePage(),
         Routes.downloadHistory: (context) => const DownloadHistoryPage(),
         Routes.favourites: (context) => const FavoritesPage(),
@@ -37,6 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -97,13 +102,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text("data"),
-    ),
-  );
 }

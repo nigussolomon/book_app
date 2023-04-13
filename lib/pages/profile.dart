@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/top_bar.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -26,21 +28,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "BOOK APP",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
-              ))
-        ],
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
       body: Container(
         color: Colors.white,
