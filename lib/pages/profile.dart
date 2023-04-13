@@ -25,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -49,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * .3,
@@ -73,69 +75,47 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "https://th.bing.com/th/id/OIP.IoUmyjrf4VaXudyiVqv2WwHaII?w=201&h=220&c=7&r=0&o=5&pid=1.7"))),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.lightBlue,
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .06,
-                  child: const Center(
-                    child: Text(
-                      "someone@example.com",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w800),
-                    ),
-                  ),
+                const SizedBox(
+                  height: 20,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.lightBlue,
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .06,
-                  child: const Center(
-                    child: Text(
-                      "+251 965432118",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w800),
-                    ),
-                  ),
-                )
+                const Text(
+                  "username",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25),
+                ),
+                const Text(
+                  "someone@example.com",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15),
+                ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size(MediaQuery.of(context).size.width, 50)),
-              child: const Text("PUBLISH A BOOK"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width * .65, 50)),
+                  child: const Text("DELETE ACCOUNT"),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width * .2, 50)),
+                  child: const Text("ADD BOOK"),
+                ),
+              ],
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dasboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourites',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }
