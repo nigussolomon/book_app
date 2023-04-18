@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+import '../resources/routes.dart';
+
+class Signin extends StatefulWidget {
+  const Signin({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<Signin> createState() => _SigninState();
 }
 
-class _SignupState extends State<Signup> {
+class _SigninState extends State<Signin> {
   bool passwordVisible = false;
-  final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -28,38 +28,23 @@ class _SignupState extends State<Signup> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 100,
-              ),
+              const SizedBox(height: 70),
               const Text(
-                "SIGN UP",
+                "SIGN IN",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                 child: TextFormField(
-                  controller: userNameController,
+                  controller: emailController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(7, 7))),
                       hintText: 'Enter your name',
-                      labelText: "Username"),
-                ),
-              ),
-              Container(             
-                padding: const EdgeInsets.all(20),
-                child: TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.elliptical(7, 7))),
-                      hintText: 'Enter your email',
-                      labelText: "Email"),
+                      labelText: "Name"),
                 ),
               ),
               Container(
@@ -77,29 +62,17 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                child: const TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.elliptical(7, 7))),
-                      hintText: 'Confirm your password',
-                      labelText: "Confirmation",
-                    )),
-              ),
-              Container(
                   height: 70,
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                   child: ElevatedButton(
                     onPressed: () {
                       FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
+                          .signInWithEmailAndPassword(
                               email: emailController.text,
                               password: passwordController.text)
                           .then((value) {
-                        Navigator.of(context).pushNamed('/');
+                        Navigator.of(context).popAndPushNamed(Routes.home);
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");
                         Fluttertoast.showToast(
@@ -113,24 +86,24 @@ class _SignupState extends State<Signup> {
                       });
                     },
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
+                        backgroundColor: const MaterialStatePropertyAll(
                             Color.fromARGB(255, 91, 180, 253)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7.0),
+                          borderRadius: BorderRadius.circular(10.0),
                         ))),
-                    child: const Text("SIGN UP"),
+                    child: const Text("Continue"),
                   )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account? "),
+                  const Text("Doesn't have an account? "),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/signin');
+                        Navigator.popAndPushNamed(context, Routes.signup);
                       },
-                      child: const Text("Sign in"))
+                      child: const Text("Sign up"))
                 ],
               )
             ],

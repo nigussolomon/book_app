@@ -1,17 +1,16 @@
 import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
-
 import '../components/item_card.dart';
 import '../components/top_bar.dart';
 
-class DownloadHistoryPage extends StatefulWidget {
-  const DownloadHistoryPage({super.key});
+class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({super.key});
 
   @override
-  State<DownloadHistoryPage> createState() => _DownloadHistoryPageState();
+  State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
+class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,18 +29,18 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             Text(
-              "Downloads",
+              "Favourites",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
             SizedBox(
               height: 10,
             ),
-            ItemCard()
+            ItemCard(),
           ],
         ),
       ),
       bottomNavigationBar: const BottomBar(
-        index: 1,
+        index: 2,
       ),
     );
   }
