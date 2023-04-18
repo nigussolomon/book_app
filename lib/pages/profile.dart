@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../components/top_bar.dart';
+import '../resources/routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -8,39 +12,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page'),
-    Text('History Page'),
-    Text('Favourites Page'),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "BOOK APP",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
-              ))
-        ],
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
       body: Container(
         color: Colors.white,
@@ -97,23 +75,38 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width * .15, 50)),
+                    label: const Text(""),
+                    icon: const Icon(Icons.delete)),
+                ElevatedButton.icon(
                   onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width * .15, 50)),
+                  label: const Text("ADD BOOK"),
+                  icon: const Icon(Icons.add),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut().then((value) {
+                      Navigator.popAndPushNamed(context, Routes.signin);
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       minimumSize:
-                          Size(MediaQuery.of(context).size.width * .65, 50)),
-                  child: const Text("DELETE ACCOUNT"),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width * .2, 50)),
-                  child: const Text("ADD BOOK"),
-                ),
+                          Size(MediaQuery.of(context).size.width * .15, 50)),
+                  label: const Text(""),
+                  icon: const Icon(Icons.logout_outlined),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
 import 'package:book_app/pages/favorites_page.dart';
 import 'package:book_app/pages/profile.dart';
@@ -5,26 +6,34 @@ import 'package:book_app/pages/search_page.dart';
 import 'package:book_app/pages/signin.dart';
 import 'package:book_app/pages/signup.dart';
 import 'package:book_app/resources/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'auth_check.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  get book => null;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.home,
+      initialRoute: 'splash',
       routes: {
+        'splash': (context) => Home(),
         Routes.signup: (context) => const Signup(),
         Routes.signin: (context) => const Signin(),
-        Routes.home: (context) => const Home(),
+        Routes.home: (context) => HomePage(),
         Routes.profile: (context) => const ProfilePage(),
         Routes.downloadHistory: (context) => const DownloadHistoryPage(),
         Routes.favourites: (context) => const FavoritesPage(),
@@ -34,6 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -51,7 +61,7 @@ class _HomeState extends State<Home> {
     super.initState();
     Future.delayed(const Duration(seconds: 5)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const Signup(),
+        builder: (BuildContext context) => const AuthCheck(),
       ));
     });
   }
@@ -94,13 +104,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text("data"),
-    ),
-  );
 }
