@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'auth_check.dart';
+import 'pages/add_book.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,14 +31,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: 'splash',
       routes: {
-        'splash': (context) => Home(),
+        'splash': (context) => const Home(),
         Routes.signup: (context) => const Signup(),
         Routes.signin: (context) => const Signin(),
         Routes.home: (context) => HomePage(),
         Routes.profile: (context) => const ProfilePage(),
         Routes.downloadHistory: (context) => const DownloadHistoryPage(),
         Routes.favourites: (context) => const FavoritesPage(),
-        Routes.searchResult: (context) => const SearchPage()
+        Routes.searchResult: (context) => const SearchPage(),
+        Routes.addBook: (context) => const AddBook()
       },
       title: 'Flutter Demo',
       theme: ThemeData(

@@ -38,7 +38,7 @@ class _SignupState extends State<Signup> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
               ),
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                 child: TextFormField(
                   controller: userNameController,
                   decoration: const InputDecoration(
@@ -49,11 +49,12 @@ class _SignupState extends State<Signup> {
                       labelText: "Username"),
                 ),
               ),
-              Container(
+              Container(             
                 padding: const EdgeInsets.all(20),
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
+
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(7, 7))),
@@ -62,7 +63,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: TextField(
                   controller: passwordController,
                   obscureText: passwordVisible,
@@ -76,7 +77,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: const TextField(
                     obscureText: true,
                     decoration: InputDecoration(
@@ -88,9 +89,9 @@ class _SignupState extends State<Signup> {
                     )),
               ),
               Container(
-                  height: 90,
+                  height: 70,
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: ElevatedButton(
                     onPressed: () {
                       FirebaseAuth.instance

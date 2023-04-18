@@ -84,7 +84,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     label: const Text(""),
                     icon: const Icon(Icons.delete)),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).popAndPushNamed(Routes.addBook);
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize:
