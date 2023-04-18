@@ -1,4 +1,7 @@
+import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
+import '../components/item_card.dart';
+import '../components/top_bar.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -11,78 +14,34 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("favorites"),
+      backgroundColor: Colors.white,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: TopBar(),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: 140,
-                    color: Colors.red,
-                  ),
-                ),
-
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Text(
-                          "Title",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20.0,
-                          ),
-                        ),
-
-                        const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-
-                        Text(
-                          "author",
-                          style: const TextStyle(fontSize: 14.0),
-                        ),
-
-                        const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
-
-                        Text(
-                          '20 views',
-                          style: const TextStyle(fontSize: 12.0),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-
-                const Icon(
-                  color: Colors.red,
-                  Icons.favorite,
-                  size: 24.0,
-                ),
-
-              ],
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.white,
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+        padding: const EdgeInsets.all(4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              "Favourites",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
-          );
-        },
+            SizedBox(
+              height: 10,
+            ),
+            ItemCard(),
+          ],
+        ),
       ),
+      bottomNavigationBar: const BottomBar(
+        index: 2,
       ),
     );
   }
 }
-
-
