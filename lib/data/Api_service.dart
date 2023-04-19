@@ -1,20 +1,22 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:book_app/data/book.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Service {
   List Books = [];
   static User? _user = FirebaseAuth.instance.currentUser;
+  // List Books = [];
   Future fetchBooks() async {
-    final response = await http.get(
-        Uri.parse('https://https://book-api-au20.onrender.com/.com/api/books'));
+    final response =
+        await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List books = [];
-      for (var book in data) {
-        Books.add(book.fromJson(book));
+      final List<Book> books = [];
+      for (var book in data["books"]) {
+        books.add(Book.fromJson(book));
       }
       return books;
     } else {
@@ -47,6 +49,21 @@ class Service {
       return file.path;
     } else {
       throw Exception('Failed to load books');
+    }
+  }
+
+  static Future favoriteBooks() async {
+    final response = await http
+        .get(Uri.parse('https://book-api-au20.onrender.com/favourites'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<Book> books = [];
+      for (var book in data) {
+        books.add(Book.fromJson(book));
+      }
+      return books;
+    } else {
+      throw Exception('Failed to load favorite books');
     }
   }
 }
