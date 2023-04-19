@@ -1,7 +1,7 @@
 import 'package:book_app/data/user.dart';
 
 class Book {
-  num bookId;
+  int bookId;
   String downloadUrl;
   String bookName;
   User bookAuthor;

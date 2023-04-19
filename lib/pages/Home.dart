@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     List books = [
       Book(
-          bookId: 1,
+          bookId: 4,
           downloadUrl: "",
           bookName: "bookName",
           bookAuthor: User(
@@ -24,7 +24,17 @@ class HomePage extends StatelessWidget {
               email: "email",
               phonenumber: "phonenumber")),
       Book(
-          bookId: 1,
+          bookId: 2,
+          downloadUrl: "",
+          bookName: "bookName21",
+          bookAuthor: User(
+              uid: 1,
+              firstname: "firstname",
+              lastname: "lastname",
+              email: "email",
+              phonenumber: "phonenumber")),
+      Book(
+          bookId: 3,
           downloadUrl: "",
           bookName: "bookName",
           bookAuthor: User(
@@ -34,9 +44,9 @@ class HomePage extends StatelessWidget {
               email: "email",
               phonenumber: "phonenumber")),
       Book(
-          bookId: 1,
+          bookId: 5,
           downloadUrl: "",
-          bookName: "bookName",
+          bookName: "mybook",
           bookAuthor: User(
               uid: 1,
               firstname: "firstname",
