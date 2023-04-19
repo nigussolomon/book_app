@@ -18,7 +18,7 @@ class Service {
   //  }
   //}
 
-  Future<List<Book>> searchBooks(String param) async {
+  static Future<List<Book>> searchBooks(String param) async {
     var queryParameters = {
       'bookname': param,
       'authorname': param,
@@ -30,7 +30,7 @@ class Service {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      //print(data);
+      //print('data: $data');
       final List<Book> books = [];
       for (var book in data) {
         books.add(Book.fromJson(book));

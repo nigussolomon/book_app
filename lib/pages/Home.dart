@@ -14,35 +14,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     List books = [
       Book(
-          bookId: 1,
-          downloadUrl: "",
-          bookName: "bookName",
-          bookAuthor: User(
-              uid: 1,
-              firstname: "firstname",
-              lastname: "lastname",
-              email: "email",
-              phonenumber: "phonenumber")),
-      Book(
-          bookId: 1,
-          downloadUrl: "",
-          bookName: "bookName",
-          bookAuthor: User(
-              uid: 1,
-              firstname: "firstname",
-              lastname: "lastname",
-              email: "email",
-              phonenumber: "phonenumber")),
-      Book(
-          bookId: 1,
-          downloadUrl: "",
-          bookName: "bookName",
-          bookAuthor: User(
-              uid: 1,
-              firstname: "firstname",
-              lastname: "lastname",
-              email: "email",
-              phonenumber: "phonenumber"))
+        id: 1,
+        bookName: "bookName",
+        authorId: 1,
+        bookFile: "",
+        authorName: "new author",
+      )
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -217,7 +194,7 @@ class HomePage extends StatelessWidget {
                                           fontWeight: FontWeight.w700),
                                     ),
                                     Text(
-                                      book.bookAuthor.firstname,
+                                      book.authorName,
                                       style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300),

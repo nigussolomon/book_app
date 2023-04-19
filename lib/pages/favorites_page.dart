@@ -35,7 +35,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
             SizedBox(
               height: 10,
             ),
-            ItemCard(),
+            //ItemCard(),
           ],
         ),
       ),

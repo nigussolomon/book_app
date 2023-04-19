@@ -20,7 +20,7 @@ class Book {
       id: json['id'],
       bookFile: json['bookfile'],
       bookName: json['bookname'],
-      authorName: json['bookname'],
+      authorName: json['author_name'],
     );
   }
 

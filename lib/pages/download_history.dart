@@ -36,7 +36,7 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
             SizedBox(
               height: 10,
             ),
-            ItemCard()
+            //ItemCard()
           ],
         ),
       ),
