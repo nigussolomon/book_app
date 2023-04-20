@@ -14,38 +14,6 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // List books = [
-    //   Book(
-    //       bookId: 1,
-    //       downloadUrl: "",
-    //       bookName: "bookName",
-    //       bookAuthor: User(
-    //           uid: 1,
-    //           firstname: "firstname",
-    //           lastname: "lastname",
-    //           email: "email",
-    //           phonenumber: "phonenumber")),
-    //   Book(
-    //       bookId: 1,
-    //       downloadUrl: "",
-    //       bookName: "bookName",
-    //       bookAuthor: User(
-    //           uid: 1,
-    //           firstname: "firstname",
-    //           lastname: "lastname",
-    //           email: "email",
-    //           phonenumber: "phonenumber")),
-    //   Book(
-    //       bookId: 1,
-    //       downloadUrl: "",
-    //       bookName: "bookName",
-    //       bookAuthor: User(
-    //           uid: 1,
-    //           firstname: "firstname",
-    //           lastname: "lastname",
-    //           email: "email",
-    //           phonenumber: "phonenumber"))
-    // ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(
@@ -224,6 +192,7 @@ class HomePage extends StatelessWidget {
                                             )),
                                       ),
                                     ),
+
                                     const SizedBox(
                                       height: 5,
                                     ),
@@ -257,6 +226,14 @@ class HomePage extends StatelessWidget {
                                             icon: Icon(Icons.thumb_up))
                                       ],
                                     ))
+
+                                    Text(
+                                      book.authorName,
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300),
+                                    )
+
                                   ],
                                 ),
                               );
