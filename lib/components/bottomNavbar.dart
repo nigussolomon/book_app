@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/download_bloc.dart';
 import '../resources/routes.dart';
 
 class BottomBar extends StatefulWidget {
@@ -19,6 +21,9 @@ class _BottomBarState extends State<BottomBar> {
     setState(() {
       _selectedIndex = index;
       Navigator.popAndPushNamed(context, routes[index]);
+      if (index == 1) {
+        BlocProvider.of<DownloadBloc>(context).add(History());
+      }
     });
   }
 

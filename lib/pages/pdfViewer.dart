@@ -22,7 +22,6 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   int? currentPage = 0;
   bool isReady = false;
   String errorMessage = '';
-  bool dark = false;
   IconData icData = Icons.dark_mode;
 
   @override
@@ -33,28 +32,12 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(""),
-        actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  if (dark == false) {
-                    dark = true;
-                    icData = Icons.light_mode;
-                  } else {
-                    dark = false;
-                    icData = Icons.dark_mode;
-                  }
-                });
-              },
-              icon: Icon(icData))
-        ],
+        title: null,
       ),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           PDFView(
-            nightMode: dark,
             filePath: widget.path,
             enableSwipe: true,
             swipeHorizontal: false,

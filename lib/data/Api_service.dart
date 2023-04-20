@@ -8,8 +8,10 @@ import 'dart:convert';
 class Service {
   List Books = [];
   static User? _user = FirebaseAuth.instance.currentUser;
+
   // List Books = [];
   Future fetchBooks() async {
+    print(_user!.uid);
     final response =
         await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
     if (response.statusCode == 200) {
@@ -46,7 +48,17 @@ class Service {
       final file = File(
           '${appDir?.path}/$filename'); // create a new file in the cache directory
       await file.writeAsBytes(response.bodyBytes);
-      return file.path;
+    } else {
+      throw Exception('Failed to load books');
+    }
+  }
+
+  static Future getDownloadedBooks() async {
+    final response = await http.get(Uri.parse(
+        'https://book-api-au20.onrender.com/downloads/${_user!.uid}'));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
     } else {
       throw Exception('Failed to load books');
     }

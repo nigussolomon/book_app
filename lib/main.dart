@@ -1,3 +1,5 @@
+import 'package:book_app/bloc/book_bloc.dart';
+import 'package:book_app/bloc/download_bloc.dart';
 import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
 import 'package:book_app/pages/favorites_page.dart';
@@ -9,6 +11,7 @@ import 'package:book_app/resources/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'auth_check.dart';
@@ -28,24 +31,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: 'splash',
-      routes: {
-        'splash': (context) => const Home(),
-        Routes.signup: (context) => const Signup(),
-        Routes.signin: (context) => const Signin(),
-        Routes.home: (context) => HomePage(),
-        Routes.profile: (context) => const ProfilePage(),
-        Routes.downloadHistory: (context) => const DownloadHistoryPage(),
-        Routes.favourites: (context) => const FavoritesPage(),
-        Routes.searchResult: (context) => const SearchPage(),
-        Routes.addBook: (context) => const AddBook()
-      },
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BookBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DownloadBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        initialRoute: 'splash',
+        routes: {
+          'splash': (context) => const Home(),
+          Routes.signup: (context) => const Signup(),
+          Routes.signin: (context) => const Signin(),
+          Routes.home: (context) => HomePage(),
+          Routes.profile: (context) => const ProfilePage(),
+          Routes.downloadHistory: (context) => const DownloadHistoryPage(),
+          Routes.favourites: (context) => const FavoritesPage(),
+          Routes.searchResult: (context) => const SearchPage(),
+          Routes.addBook: (context) => const AddBook()
+        },
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

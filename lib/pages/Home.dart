@@ -58,8 +58,8 @@ class HomePage extends StatelessWidget {
                           //prefixIcon: const Icon(Icons.search_outlined),
                           hintText: 'Search Books here..',
                           suffixIcon: IconButton(
-                            icon:
-                                Icon(Icons.search_outlined, color: Colors.blue),
+                            icon: const Icon(Icons.search_outlined,
+                                color: Colors.blue),
                             onPressed: () {
                               Navigator.pushNamed(context, Routes.searchResult);
                             },
@@ -80,24 +80,27 @@ class HomePage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * .1,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5,
+                          itemCount:
+                              state.book.length - (state.book.length ~/ 2),
                           itemBuilder: (BuildContext context, int index) {
+                            Book book = state.book[index];
                             return Container(
                               child: Container(
                                 margin: const EdgeInsets.only(bottom: 15),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
                                         child: Hero(
-                                          tag: "book tag",
+                                          tag: "book tag + $index",
                                           child: Image.network(
-                                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.n-GYj4PuriTRbbExR10xsgHaHa%26pid%3DApi&f=1&ipt=e872127db6fd44a6b9f9212500ce4e5bee1367785b01b0c5eec9340f81056a38&ipo=images",
+                                            "https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg",
                                             fit: BoxFit.cover,
-                                            width: 60,
-                                            height: 70,
+                                            width: 70,
+                                            height: 40,
                                           ),
                                         ),
                                       ),
@@ -108,31 +111,18 @@ class HomePage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Column(
-                                              children: const [
-                                                Text(
-                                                  "Title",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                                Text("Author",
-                                                    style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.grey)),
-                                              ],
-                                            ),
-                                            const Text(
-                                              "description description",
-                                              style: TextStyle(
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.normal,
-                                                overflow: TextOverflow.ellipsis,
+                                            Text(
+                                              book.bookName,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
                                               ),
                                             ),
+                                            Text(book.authorName,
+                                                style: const TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.grey))
                                           ],
                                         ),
                                       ),
@@ -196,34 +186,26 @@ class HomePage extends StatelessWidget {
                                       height: 5,
                                     ),
                                     SizedBox(
-                                        child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              book.bookName,
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                            Text(
-                                              book.authorName,
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w300),
-                                            )
-                                          ],
-                                        ),
-                                        IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.thumb_up))
-                                      ],
+                                        child: SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            book.bookName,
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                          Text(
+                                            book.authorName,
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300),
+                                          )
+                                        ],
+                                      ),
                                     ))
                                   ],
                                 ),
@@ -234,7 +216,7 @@ class HomePage extends StatelessWidget {
                   ));
             }
           } else if (state is BookFailed) {
-            return Center();
+            return const Center();
           }
           return Container();
         },

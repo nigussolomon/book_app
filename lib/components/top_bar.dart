@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/book_bloc.dart';
 import '../resources/routes.dart';
 
 class TopBar extends StatelessWidget {
@@ -22,6 +24,15 @@ class TopBar extends StatelessWidget {
           },
           icon: const Icon(
             Icons.person,
+            color: Colors.black,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            BlocProvider.of<BookBloc>(context).add(const BookFetchEvent());
+          },
+          icon: const Icon(
+            Icons.refresh,
             color: Colors.black,
           ),
         )
