@@ -182,6 +182,7 @@ class HomePage extends StatelessWidget {
                                             )),
                                       ),
                                     ),
+
                                     const SizedBox(
                                       height: 5,
                                     ),
@@ -207,6 +208,14 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                     ))
+
+                                    Text(
+                                      book.authorName,
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300),
+                                    )
+
                                   ],
                                 ),
                               );

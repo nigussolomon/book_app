@@ -9,20 +9,26 @@ class Service {
   List Books = [];
   static User? _user = FirebaseAuth.instance.currentUser;
 
-  // List Books = [];
-  Future fetchBooks() async {
+  static Future<List<Book>> searchBooks(String param) async {
     print(_user!.uid);
-    final response =
-        await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
+    var queryParameters = {
+      'bookname': param,
+      'authorname': param,
+    };
+    var uri =
+        Uri.https('book-api-au20.onrender.com', '/search', queryParameters);
+    var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      //print('data: $data');
       final List<Book> books = [];
-      for (var book in data["books"]) {
+      for (var book in data) {
         books.add(Book.fromJson(book));
       }
       return books;
     } else {
-      throw Exception('Failed to load books');
+      //print(response.body);
+      throw Exception("failed to search books");
     }
   }
 
@@ -60,7 +66,8 @@ class Service {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to load books');
+      //print(response.body);
+      throw Exception("failed to search books");
     }
   }
 
