@@ -4,9 +4,9 @@ import '../components/item_card.dart';
 import '../components/top_bar.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:book_app/block/search_bloc.dart';
-import 'package:book_app/block/search_state.dart';
-import 'package:book_app/block/search_event.dart';
+import 'package:book_app/bloc/search_bloc.dart';
+import 'package:book_app/bloc/search_state.dart';
+import 'package:book_app/bloc/search_event.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
