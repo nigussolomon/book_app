@@ -1,5 +1,6 @@
 import 'package:book_app/bloc/book_bloc.dart';
 import 'package:book_app/bloc/download_bloc.dart';
+import 'package:book_app/bloc/search_bloc.dart';
 import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
 import 'package:book_app/pages/favorites_page.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DownloadBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SearchBloc(),
         ),
       ],
       child: MaterialApp(

@@ -4,6 +4,8 @@ import "package:book_app/resources/routes.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "../bloc/book_bloc.dart";
+import "../bloc/search_bloc.dart";
+import "../bloc/search_event.dart";
 import "../components/bottomNavbar.dart";
 import "../components/item_card.dart";
 import "../components/top_bar.dart";
@@ -61,6 +63,8 @@ class HomePage extends StatelessWidget {
                             icon: const Icon(Icons.search_outlined,
                                 color: Colors.blue),
                             onPressed: () {
+                              BlocProvider.of<SearchBloc>(context).add(
+                                  SubmitSearchEvent(_searchController.text));
                               Navigator.pushNamed(context, Routes.searchResult);
                             },
                           ),
@@ -182,7 +186,6 @@ class HomePage extends StatelessWidget {
                                             )),
                                       ),
                                     ),
-
                                     const SizedBox(
                                       height: 5,
                                     ),
@@ -207,15 +210,13 @@ class HomePage extends StatelessWidget {
                                           )
                                         ],
                                       ),
-                                    ))
-
+                                    )),
                                     Text(
                                       book.authorName,
                                       style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300),
                                     )
-
                                   ],
                                 ),
                               );

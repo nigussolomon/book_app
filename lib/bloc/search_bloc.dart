@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:book_app/block/search_event.dart';
-import 'package:book_app/block/search_state.dart';
+import 'package:book_app/bloc/search_event.dart';
+import 'package:book_app/bloc/search_state.dart';
 import 'package:book_app/data/Api_service.dart';
 import 'package:book_app/data/book.dart';
 
