@@ -6,9 +6,7 @@ import 'dart:developer' as dev;
 
 void main() async {
   test('api must search for books given a param', () async {
-    final service = Service();
-
-    List<Book> result = await service.searchBooks("chip8");
+    List<Book> result = await Service.searchBooks("chip8");
 
     dev.log("hello world");
     //print("result: $result");
