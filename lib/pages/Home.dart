@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                                         child: Hero(
                                           tag: "book tag + $index",
                                           child: Image.network(
-                                            "https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg",
+                                            "https://book-api-lksx.onrender.com/images/${book.id}",
                                             fit: BoxFit.cover,
                                             width: 70,
                                             height: 40,
@@ -176,13 +176,14 @@ class HomePage extends StatelessWidget {
                                       child: Container(
                                         width: 180,
                                         height: 160,
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5)),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
                                               image: NetworkImage(
-                                                  'https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'),
+                                                  "https://book-api-lksx.onrender.com/images/${book.id}"),
                                             )),
                                       ),
                                     ),
@@ -211,12 +212,6 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                     )),
-                                    Text(
-                                      book.authorName,
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300),
-                                    )
                                   ],
                                 ),
                               );

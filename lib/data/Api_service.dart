@@ -10,9 +10,10 @@ class Service {
 
   Future fetchBooks() async {
     final response =
-        await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
+        await http.get(Uri.parse('https://book-api-lksx.onrender.com/books'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print(data);
       final List<Book> books = [];
       for (var book in data["books"]) {
         books.add(Book.fromJson(book));
@@ -23,7 +24,6 @@ class Service {
     }
   }
 
-
   static Future<List<Book>> searchBooks(String param) async {
     print(_user!.uid);
     var queryParameters = {
@@ -31,25 +31,23 @@ class Service {
       'authorname': param,
     };
     var uri =
-        Uri.https('book-api-au20.onrender.com', '/search', queryParameters);
+        Uri.https('book-api-lksx.onrender.com', '/search', queryParameters);
     var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      //print('data: $data');
       final List<Book> books = [];
       for (var book in data) {
         books.add(Book.fromJson(book));
       }
       return books;
     } else {
-      //print(response.body);
       throw Exception("failed to search books");
     }
   }
 
   static Future downloadBook(int bookid) async {
     final response = await http.post(Uri.parse(
-        'https://book-api-au20.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
+        'https://book-api-lksx.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -62,7 +60,7 @@ class Service {
 
   static Future getDownloadedBook(int downloadid, String filename) async {
     final response = await http.get(
-        Uri.parse('https://book-api-au20.onrender.com/download/$downloadid'));
+        Uri.parse('https://book-api-lksx.onrender.com/download/$downloadid'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final appDir = await getExternalStorageDirectory();
@@ -76,19 +74,45 @@ class Service {
 
   static Future getDownloadedBooks() async {
     final response = await http.get(Uri.parse(
-        'https://book-api-au20.onrender.com/downloads/${_user!.uid}'));
-    print(response.statusCode);
+        'https://book-api-lksx.onrender.com/downloads/${_user!.uid}'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      //print(response.body);
       throw Exception("failed to search books");
     }
   }
 
+  static Future uploadbook(String? path, String title, String author,
+      String description, String? path2) async {
+    final url = Uri.parse('https://book-api-lksx.onrender.com/books');
+    final file = File(path!);
+    final img = File(path2!);
+    final request = http.MultipartRequest('POST', url);
+    final fileStream = http.ByteStream(file.openRead());
+    final imageStream = http.ByteStream(img.openRead());
+    final imageLength = await img.length();
+    final fileLength = await file.length();
+    final multipartFile = http.MultipartFile('bookfile', fileStream, fileLength,
+        filename: file.path.split('/').last);
+    final multipartImage = http.MultipartFile(
+        'image_url', imageStream, imageLength,
+        filename: file.path.split('/').last);
+    request.files.add(multipartFile);
+    request.files.add(multipartImage);
+    request.fields['bookname'] = title;
+    request.fields['author_name'] = author;
+    request.fields['authorid'] = _user!.uid;
+    request.fields['description'] = description;
+
+    final response = await request.send();
+    final responseString = await response.stream.bytesToString();
+    print(responseString);
+    return responseString;
+  }
+
   static Future favoriteBooks() async {
     final response = await http
-        .get(Uri.parse('https://book-api-au20.onrender.com/favourites'));
+        .get(Uri.parse('https://book-api-lksx.onrender.com/favourites'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final List<Book> books = [];

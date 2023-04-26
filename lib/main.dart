@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'auth_check.dart';
+import 'bloc/favorites_bloc.dart';
 import 'pages/add_book.dart';
 
 void main() {
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SearchBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FavoritesBloc(),
         ),
       ],
       child: MaterialApp(

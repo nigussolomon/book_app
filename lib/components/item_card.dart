@@ -30,7 +30,7 @@ class ItemCard extends StatelessWidget {
                     child: Hero(
                       tag: items[index]!.bookName,
                       child: Image.network(
-                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.n-GYj4PuriTRbbExR10xsgHaHa%26pid%3DApi&f=1&ipt=e872127db6fd44a6b9f9212500ce4e5bee1367785b01b0c5eec9340f81056a38&ipo=images",
+                        "https://book-api-lksx.onrender.com/images/${items[index]!.id}",
                         fit: BoxFit.cover,
                         width: 80,
                         height: 100,
