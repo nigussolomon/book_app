@@ -27,21 +27,17 @@ class _SignupState extends State<Signup> {
     passwordVisible = true;
   }
 
-  File? _image;
+  File _image = File('');
   final _picker = ImagePicker();
 
   Future<void> pickUploadProfilePic(
-      // ImageSource source,
-      ) async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    // final LostDataResponse response = await picker.retrieveLostData();
-    // if (response.isEmpty) {
-    //   return;
-    // }
-    // final XFile? files = response.file;
+    ImageSource source,
+  ) async {
+    final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
       _image = File(image.path);
     }
+    setState(() {});
   }
 
   @override
@@ -52,7 +48,7 @@ class _SignupState extends State<Signup> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               const Text(
@@ -63,14 +59,20 @@ class _SignupState extends State<Signup> {
                 child: Stack(
                   children: [
                     Expanded(
-                      child: CircleAvatar(
-                        radius: 80,
-                        child: Image.file(
-                          File(_image!.path),
-                          fit: BoxFit.cover,
-                        ),
-                        // backgroundImage: files ? Colors.white : _image,
-                      ),
+                      child: _image.path != ''
+                          ? Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: Image.file(_image).image)),
+                            )
+                          : const CircleAvatar(
+                              radius: 80,
+                            ),
                     ),
                     Positioned(
                         bottom: 1,
@@ -78,22 +80,22 @@ class _SignupState extends State<Signup> {
                         child: Container(
                           height: 35,
                           width: 35,
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
                           child: InkWell(
                             onTap: () {
-                              pickUploadProfilePic(
-                                  // ImageSource.camera,
-                                  );
+                              setState(() {
+                                pickUploadProfilePic(ImageSource.camera);
+                              });
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.add_a_photo,
                               size: 15.0,
                               color: Color.fromARGB(255, 233, 231, 231),
                             ),
                           ),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
                         ))
                   ],
                 ),
