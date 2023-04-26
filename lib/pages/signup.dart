@@ -64,14 +64,18 @@ class _SignupState extends State<Signup> {
                               height: 150,
                               width: 150,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
                                   image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.file(_image).image)),
                             )
                           : const CircleAvatar(
                               radius: 80,
+                              child: Icon(
+                                Icons.person,
+                                size: 80,
+                              ),
                             ),
                     ),
                     Positioned(
