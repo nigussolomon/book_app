@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -22,6 +27,23 @@ class _SignupState extends State<Signup> {
     passwordVisible = true;
   }
 
+  File? _image;
+  final _picker = ImagePicker();
+
+  Future<void> pickUploadProfilePic(
+      // ImageSource source,
+      ) async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    // final LostDataResponse response = await picker.retrieveLostData();
+    // if (response.isEmpty) {
+    //   return;
+    // }
+    // final XFile? files = response.file;
+    if (image != null) {
+      _image = File(image.path);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +53,50 @@ class _SignupState extends State<Signup> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(
-                height: 100,
+                height: 30,
               ),
               const Text(
                 "SIGN UP",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    Expanded(
+                      child: CircleAvatar(
+                        radius: 80,
+                        child: Image.file(
+                          File(_image!.path),
+                          fit: BoxFit.cover,
+                        ),
+                        // backgroundImage: files ? Colors.white : _image,
+                      ),
+                    ),
+                    Positioned(
+                        bottom: 1,
+                        right: 1,
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          child: InkWell(
+                            onTap: () {
+                              pickUploadProfilePic(
+                                  // ImageSource.camera,
+                                  );
+                            },
+                            child: Icon(
+                              Icons.add_a_photo,
+                              size: 15.0,
+                              color: Color.fromARGB(255, 233, 231, 231),
+                            ),
+                          ),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                        ))
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
@@ -49,12 +110,11 @@ class _SignupState extends State<Signup> {
                       labelText: "Username"),
                 ),
               ),
-              Container(             
+              Container(
                 padding: const EdgeInsets.all(20),
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
-
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(7, 7))),
