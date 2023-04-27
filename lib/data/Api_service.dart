@@ -5,22 +5,28 @@ import 'package:book_app/data/book.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:book_app/utils/errors/errors.dart';
+
 class Service {
   //static final User? _user = FirebaseAuth.instance.currentUser;
   static final User? _user = null;
 
   static Future<List<Book>> fetchBooks() async {
     final response =
-        await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
+        await http.get(Uri.parse('https://book-api-lksx.onrender.com/books'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<Book> books = [];
-      for (var book in data["books"]) {
-        books.add(Book.fromJson(book));
+      if (data["boooks"] == "No boooks found") {
+        throw NoBooksException("No Books Found");
+      } else {
+        final List<Book> books = [];
+        for (var book in data["books"]) {
+          books.add(Book.fromJson(book));
+        }
+        return books;
       }
-      return books;
     } else {
-      throw Exception('Failed to load books');
+      throw FailedToLoadBooksError('Failed to load books');
     }
   }
 
@@ -35,15 +41,12 @@ class Service {
     var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      // print('data: $data');
       final List<Book> books = [];
       for (var book in data) {
         books.add(Book.fromJson(book));
       }
-      print("books: $books");
       return books;
     } else {
-      // print(response.body);
       throw Exception("failed to search books");
     }
   }
@@ -51,10 +54,8 @@ class Service {
   static Future downloadBook(int bookid) async {
     final response = await http.post(Uri.parse(
         'https://book-api-au20.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data);
       return data;
     } else {
       throw Exception('Failed to load books');

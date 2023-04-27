@@ -1,3 +1,4 @@
+import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
 
 import '../components/item_card.dart';
@@ -93,6 +94,7 @@ class _SearchPageState extends State<SearchPage> {
           }
         },
       ),
+      bottomNavigationBar: const BottomBar(index: 1),
     );
   }
 }
