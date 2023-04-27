@@ -25,12 +25,10 @@ class Service {
         }
         return books;
       }
-
-      print(response.body);
-      return books;
     } else {
       print("internet error");
       throw Exception('Failed to load books');
+    }
   }
 
   static Future<List<Book>> searchBooks(String param) async {

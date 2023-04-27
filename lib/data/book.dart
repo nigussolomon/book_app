@@ -7,17 +7,15 @@ class Book {
   String authorName;
   String desc;
 
-
-  Book(
-      {required this.authorId,
-      required this.desc,
-      required this.id,
-      required this.image_url,
-      required this.bookFile,
-      required this.bookName,
-      required this.authorName,
-      required this.imageUrl,
-      required this.description});
+  Book({
+    required this.authorId,
+    required this.desc,
+    required this.id,
+    required this.image_url,
+    required this.bookFile,
+    required this.bookName,
+    required this.authorName,
+  });
 
   factory Book.fromJson(Map<String, dynamic> json) {
     print("json: $json");
@@ -27,8 +25,8 @@ class Book {
         bookFile: json['bookfile'],
         bookName: json['bookname'],
         authorName: json['author_name'],
-        imageUrl: json['image_url'],
-        description: json['description']);
+        image_url: json['image_url'],
+        desc: json['description']);
   }
 
   Map<String, dynamic> toJson() {

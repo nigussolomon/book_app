@@ -180,7 +180,7 @@ Widget bookGrid(BookSuccess state) {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  book.description,
+                  book.desc,
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.normal,

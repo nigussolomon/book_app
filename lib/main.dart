@@ -21,7 +21,7 @@ import 'pages/add_book.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  //Firebase.initializeApp();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
