@@ -23,26 +23,26 @@ class Service {
     }
   }
 
-
   static Future<List<Book>> searchBooks(String param) async {
-    print(_user!.uid);
+    // print(_user!.uid);
     var queryParameters = {
       'bookname': param,
       'authorname': param,
     };
     var uri =
-        Uri.https('book-api-au20.onrender.com', '/search', queryParameters);
+        Uri.https('book-api-lksx.onrender.com', '/search', queryParameters);
     var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      //print('data: $data');
+      // print('data: $data');
       final List<Book> books = [];
       for (var book in data) {
         books.add(Book.fromJson(book));
       }
+      // print("books: $books");
       return books;
     } else {
-      //print(response.body);
+      // print(response.body);
       throw Exception("failed to search books");
     }
   }

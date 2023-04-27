@@ -12,7 +12,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         if (event is SubmitSearchEvent) {
           emit(SearchLoadingState());
           try {
+            //print("hello");
             List<Book?> books = await Service.searchBooks(event.param);
+            //print("found books");
             emit(SearchSuccessState(books));
           } catch (e) {
             emit(SearchErrorState(e.toString()));

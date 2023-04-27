@@ -49,6 +49,7 @@ class _SearchPageState extends State<SearchPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is SearchSuccessState) {
+            //print("found in page");
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
