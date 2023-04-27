@@ -15,7 +15,12 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
-  List routes = [Routes.home, Routes.downloadHistory, Routes.favourites];
+  List routes = [
+    Routes.home,
+    Routes.searchResult,
+    Routes.downloadHistory,
+    Routes.favourites
+  ];
 
   void _onItemTapped(int index) {
     setState(() {

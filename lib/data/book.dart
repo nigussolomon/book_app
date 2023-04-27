@@ -1,5 +1,3 @@
-import 'package:book_app/data/user.dart';
-
 class Book {
   String authorId;
   int id;
@@ -9,6 +7,7 @@ class Book {
   String authorName;
   String desc;
 
+
   Book(
       {required this.authorId,
       required this.desc,
@@ -16,18 +15,20 @@ class Book {
       required this.image_url,
       required this.bookFile,
       required this.bookName,
-      required this.authorName});
+      required this.authorName,
+      required this.imageUrl,
+      required this.description});
 
   factory Book.fromJson(Map<String, dynamic> json) {
+    print("json: $json");
     return Book(
-      authorId: json['author_id'],
-      id: json['id'],
-      desc: json['description'],
-      image_url: json['image_url'],
-      bookFile: json['bookfile'],
-      bookName: json['bookname'],
-      authorName: json['author_name'],
-    );
+        authorId: json['author_id'],
+        id: json['id'],
+        bookFile: json['bookfile'],
+        bookName: json['bookname'],
+        authorName: json['author_name'],
+        imageUrl: json['image_url'],
+        description: json['description']);
   }
 
   Map<String, dynamic> toJson() {

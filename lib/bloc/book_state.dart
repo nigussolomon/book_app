@@ -18,3 +18,5 @@ class BookSuccess extends BookState {
 }
 
 class BookFailed extends BookState {}
+
+class BookEmpty extends BookState {}

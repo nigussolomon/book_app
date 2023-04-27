@@ -30,3 +30,12 @@ class SearchErrorState extends SearchState {
   @override
   List<Object> get props => [];
 }
+
+class SearchEmptyState extends SearchState {
+  final String error;
+
+  SearchEmptyState(this.error);
+
+  @override
+  List<Object> get props => [];
+}
