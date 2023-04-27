@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -22,6 +27,19 @@ class _SignupState extends State<Signup> {
     passwordVisible = true;
   }
 
+  File _image = File('');
+  final _picker = ImagePicker();
+
+  Future<void> pickUploadProfilePic(
+    ImageSource source,
+  ) async {
+    final XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+      _image = File(image.path);
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +48,61 @@ class _SignupState extends State<Signup> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(
-                height: 100,
+              const SizedBox(
+                height: 30,
               ),
               const Text(
                 "SIGN UP",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    Expanded(
+                      child: _image.path != ''
+                          ? Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: Image.file(_image).image)),
+                            )
+                          : const CircleAvatar(
+                              radius: 80,
+                              child: Icon(
+                                Icons.person,
+                                size: 80,
+                              ),
+                            ),
+                    ),
+                    Positioned(
+                        bottom: 1,
+                        right: 1,
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                pickUploadProfilePic(ImageSource.camera);
+                              });
+                            },
+                            child: const Icon(
+                              Icons.add_a_photo,
+                              size: 15.0,
+                              color: Color.fromARGB(255, 233, 231, 231),
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
@@ -49,12 +116,11 @@ class _SignupState extends State<Signup> {
                       labelText: "Username"),
                 ),
               ),
-              Container(             
+              Container(
                 padding: const EdgeInsets.all(20),
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
-
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(7, 7))),
