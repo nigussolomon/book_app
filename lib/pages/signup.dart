@@ -58,49 +58,78 @@ class _SignupState extends State<Signup> {
               Center(
                 child: Stack(
                   children: [
-                    Expanded(
-                      child: _image.path != ''
-                          ? Container(
-                              height: 150,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: Image.file(_image).image)),
-                            )
-                          : const CircleAvatar(
-                              radius: 80,
-                              child: Icon(
-                                Icons.person,
-                                size: 80,
-                              ),
-                            ),
-                    ),
-                    Positioned(
-                        bottom: 1,
-                        right: 1,
-                        child: Container(
-                          height: 35,
-                          width: 35,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                pickUploadProfilePic(ImageSource.camera);
-                              });
-                            },
-                            child: const Icon(
-                              Icons.add_a_photo,
-                              size: 15.0,
-                              color: Color.fromARGB(255, 233, 231, 231),
+                    _image.path != ''
+                        ? Container(
+                            height: 150,
+                            width: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(100)),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.file(_image).image)),
+                          )
+                        : const CircleAvatar(
+                            radius: 80,
+                            child: Icon(
+                              Icons.person,
+                              size: 100,
                             ),
                           ),
-                        ))
+                    Positioned(
+                      bottom: 1,
+                      right: 1,
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SimpleDialog(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  pickUploadProfilePic(
+                                                      ImageSource.gallery);
+                                                });
+                                              },
+                                              icon: const Icon(
+                                                Icons.image,
+                                              )),
+                                          Text("GALLERY")
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  pickUploadProfilePic(
+                                                      ImageSource.camera);
+                                                });
+                                              },
+                                              icon: const Icon(
+                                                Icons.camera,
+                                              )),
+                                          Text("CAMERA")
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Icon(Icons.camera_enhance, color: Colors.blue),
+                      ),
+                    )
                   ],
                 ),
               ),

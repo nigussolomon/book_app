@@ -2,18 +2,26 @@ import 'package:book_app/data/book.dart';
 import 'package:book_app/data/user.dart';
 
 class Download {
-  Book book;
-  User user;
+  int book_id;
+  String user_id;
 
   Download({
-    required this.book,
-    required this.user,
+    required this.book_id,
+    required this.user_id,
   });
 
   factory Download.fromJson(Map<String, dynamic> json) {
     return Download(
-      book: json['book'],
-      user: json['user'],
+      book_id: json['bookid'],
+      user_id: json['userid'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {
+      'bookid': book_id,
+      'userid': user_id,
+    };
+    return data;
   }
 }
