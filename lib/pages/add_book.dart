@@ -51,6 +51,7 @@ class _AddBookState extends State<AddBook> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
+                  width: MediaQuery.of(context).size.width * .45,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
@@ -60,6 +61,8 @@ class _AddBookState extends State<AddBook> {
                     children: [
                       const Text("Selected PDF"),
                       Text(result?.files[0].name ?? '',
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       IconButton(
@@ -81,6 +84,7 @@ class _AddBookState extends State<AddBook> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
+                  width: MediaQuery.of(context).size.width * .45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       borderRadius:
@@ -89,6 +93,8 @@ class _AddBookState extends State<AddBook> {
                     children: [
                       const Text("Selected Image"),
                       Text(img?.files[0].name ?? '',
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       IconButton(

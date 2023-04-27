@@ -15,12 +15,7 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
-  List routes = [
-    Routes.home,
-    Routes.searchResult,
-    Routes.downloadHistory,
-    Routes.favourites
-  ];
+  List routes = [Routes.home, Routes.downloadHistory, Routes.favourites];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -38,7 +33,7 @@ class _BottomBarState extends State<BottomBar> {
     return DotNavigationBar(
       boxShadow: const [
         BoxShadow(
-            color: Colors.grey,
+            color: Color.fromARGB(55, 182, 182, 182),
             spreadRadius: 1,
             blurRadius: 5,
             offset: Offset(1, 1))
