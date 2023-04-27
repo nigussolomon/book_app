@@ -25,9 +25,12 @@ class Service {
         }
         return books;
       }
+
+      print(response.body);
+      return books;
     } else {
-      throw FailedToLoadBooksError('Failed to load books');
-    }
+      print("internet error");
+      throw Exception('Failed to load books');
   }
 
   static Future<List<Book>> searchBooks(String param) async {
@@ -57,7 +60,8 @@ class Service {
 
   static Future downloadBook(int bookid) async {
     final response = await http.post(Uri.parse(
-        'https://book-api-au20.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
+        'https://book-api-lksx.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
@@ -68,7 +72,7 @@ class Service {
 
   static Future getDownloadedBook(int downloadid, String filename) async {
     final response = await http.get(
-        Uri.parse('https://book-api-au20.onrender.com/download/$downloadid'));
+        Uri.parse('https://book-api-lksx.onrender.com/download/$downloadid'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final appDir = await getExternalStorageDirectory();
@@ -82,7 +86,7 @@ class Service {
 
   static Future getDownloadedBooks() async {
     final response = await http.get(Uri.parse(
-        'https://book-api-au20.onrender.com/downloads/${_user!.uid}'));
+        'https://book-api-lksx.onrender.com/downloads/${_user!.uid}'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -94,7 +98,7 @@ class Service {
 
   static Future favoriteBooks() async {
     final response = await http
-        .get(Uri.parse('https://book-api-au20.onrender.com/favourites'));
+        .get(Uri.parse('https://book-api-lksx.onrender.com/favourites'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final List<Book> books = [];

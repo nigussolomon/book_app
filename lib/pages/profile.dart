@@ -12,6 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final User? _user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,15 +57,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  "username",
+                Text(
+                  _user!.email!.split('@')[0],
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w800,
                       fontSize: 25),
                 ),
-                const Text(
-                  "someone@example.com",
+                Text(
+                  _user!.email!,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
@@ -75,15 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton.icon(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        minimumSize:
-                            Size(MediaQuery.of(context).size.width * .15, 50)),
-                    label: const Text(""),
-                    icon: const Icon(Icons.delete)),
-                ElevatedButton.icon(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).popAndPushNamed(Routes.addBook);
                   },
@@ -91,10 +84,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: Colors.green,
                       minimumSize:
                           Size(MediaQuery.of(context).size.width * .15, 50)),
-                  label: const Text("ADD BOOK"),
-                  icon: const Icon(Icons.add),
+                  child: const Icon(Icons.add),
                 ),
-                ElevatedButton.icon(
+                ElevatedButton(
                   onPressed: () {
                     FirebaseAuth.instance.signOut().then((value) {
                       Navigator.popAndPushNamed(context, Routes.signin);
@@ -104,8 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: Colors.red,
                       minimumSize:
                           Size(MediaQuery.of(context).size.width * .15, 50)),
-                  label: const Text(""),
-                  icon: const Icon(Icons.logout_outlined),
+                  child: const Icon(Icons.logout_outlined),
                 )
               ],
             ),

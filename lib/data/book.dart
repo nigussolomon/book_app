@@ -1,15 +1,18 @@
 class Book {
   String authorId;
   int id;
+  String image_url;
   String bookFile;
   String bookName;
   String authorName;
-  String imageUrl;
-  String description;
+  String desc;
+
 
   Book(
       {required this.authorId,
+      required this.desc,
       required this.id,
+      required this.image_url,
       required this.bookFile,
       required this.bookName,
       required this.authorName,
@@ -35,8 +38,7 @@ class Book {
       'bookfile': bookFile,
       'bookname': bookName,
       'author_name': authorName,
-      'image_url': imageUrl,
-      'description': description
+      'image_url': image_url
     };
     return data;
   }

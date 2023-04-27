@@ -9,18 +9,15 @@ part 'book_state.dart';
 
 class BookBloc extends Bloc<BookEvent, BookState> {
   BookBloc() : super(BookInitial()) {
-    on<BookEvent>(
-      (event, emit) async {
-        emit(BookLoading());
-        try {
-          final books = await Service.fetchBooks();
-          emit(BookSuccess(book: books));
-        } on FailedToLoadBooksError {
-          emit(BookFailed());
-        } on NoBooksException {
-          emit(BookEmpty());
-        }
-      },
-    );
+    on<BookEvent>((event, emit) async {
+      emit(BookLoading());
+      try {
+        final bookapi = await _apiServiceProvider.fetchBooks();
+        emit(BookSuccess(book: bookapi));
+      } catch (e) {
+        print(e);
+        emit(BookFailed());
+      }
+    });
   }
 }
