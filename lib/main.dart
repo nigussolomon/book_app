@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5)).then((value) {
+    Future.delayed(const Duration(seconds: 1)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
         builder: (BuildContext context) => const SearchPage(),
       ));

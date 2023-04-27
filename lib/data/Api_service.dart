@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Service {
-  static final User? _user = FirebaseAuth.instance.currentUser;
+  //static final User? _user = FirebaseAuth.instance.currentUser;
+  static final User? _user = null;
 
-  Future fetchBooks() async {
+  static Future<List<Book>> fetchBooks() async {
     final response =
         await http.get(Uri.parse('https://book-api-au20.onrender.com/books'));
     if (response.statusCode == 200) {
@@ -24,7 +25,7 @@ class Service {
   }
 
   static Future<List<Book>> searchBooks(String param) async {
-    // print(_user!.uid);
+    //print(_user!.uid);
     var queryParameters = {
       'bookname': param,
       'authorname': param,
@@ -39,7 +40,7 @@ class Service {
       for (var book in data) {
         books.add(Book.fromJson(book));
       }
-      // print("books: $books");
+      print("books: $books");
       return books;
     } else {
       // print(response.body);

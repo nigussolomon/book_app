@@ -29,6 +29,7 @@ class _SearchPageState extends State<SearchPage> {
       body: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
           if (state is SearchInitialState) {
+            print("init state");
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
@@ -45,16 +46,17 @@ class _SearchPageState extends State<SearchPage> {
               ),
             );
           } else if (state is SearchLoadingState) {
+            print("loading state");
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is SearchSuccessState) {
-            //print("found in page");
+            print("success state");
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
-              padding: const EdgeInsets.all(4),
+              // padding: const EdgeInsets.all(4),
               child: Column(
                 children: [
                   searchText(_searchController, context),
@@ -66,8 +68,25 @@ class _SearchPageState extends State<SearchPage> {
               ),
             );
           } else if (state is SearchErrorState) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            print("error state");
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+              padding: const EdgeInsets.all(4),
+              child: Column(
+                children: [
+                  searchText(_searchController, context),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  const Expanded(
+                    child: Center(
+                      child: Text("some error occured, please try again"),
+                    ),
+                  ),
+                ],
+              ),
             );
           } else {
             return const Center(child: Text("something went wrong"));
@@ -94,7 +113,7 @@ Widget searchText(
           context
               .read<SearchBloc>()
               .add(SubmitSearchEvent(searchController.text));
-          //searchController.clear()
+          //searchController.clear();
         },
       ),
     ),
