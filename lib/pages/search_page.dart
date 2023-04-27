@@ -30,34 +30,34 @@ class _SearchPageState extends State<SearchPage> {
       body: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
           if (state is SearchInitialState) {
-            print("init state");
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
-              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
-              padding: const EdgeInsets.all(4),
+              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
               child: Column(
                 children: [
                   searchText(_searchController, context),
                   const SizedBox(
                     height: 10,
                   ),
-                  //ItemCard(items: state.books),
+                  const Expanded(
+                    child: Center(child: Text("Search for books..")),
+                  ),
                 ],
               ),
             );
           } else if (state is SearchLoadingState) {
-            print("loading state");
-            return const Center(
-              child: CircularProgressIndicator(),
+            // print("loading state");
+            return const Expanded(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else if (state is SearchSuccessState) {
-            print("success state");
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
-              // padding: const EdgeInsets.all(4),
               child: Column(
                 children: [
                   searchText(_searchController, context),
@@ -69,7 +69,25 @@ class _SearchPageState extends State<SearchPage> {
               ),
             );
           } else if (state is SearchErrorState) {
-            print("error state");
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+              padding: const EdgeInsets.all(4),
+              child: Column(
+                children: [
+                  searchText(_searchController, context),
+                  const Expanded(
+                    child: Center(
+                      child: Text("some error occured, please try again"),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is SearchEmptyState) {
+            // return const Center(
+            // child: Text("No Books found, please search again"));
             return Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
@@ -115,7 +133,7 @@ Widget searchText(
           context
               .read<SearchBloc>()
               .add(SubmitSearchEvent(searchController.text));
-          //searchController.clear();
+          // searchController.clear();
         },
       ),
     ),

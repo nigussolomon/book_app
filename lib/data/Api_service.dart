@@ -41,11 +41,15 @@ class Service {
     var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<Book> books = [];
-      for (var book in data) {
-        books.add(Book.fromJson(book));
+      if (data == []) {
+        throw NoBooksException("books not found");
+      } else {
+        final List<Book> books = [];
+        for (var book in data) {
+          books.add(Book.fromJson(book));
+        }
+        return books;
       }
-      return books;
     } else {
       throw Exception("failed to search books");
     }
