@@ -7,14 +7,14 @@ part 'favorites_event.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  final _ServiceProvider = Service();
+  // final _ServiceProvider = Service();
   List favorite = [];
   // List favoriteLoad = [];
   FavoritesBloc() : super(FavoritesInitial()) {
     on<FavoritesFetchEvent>((event, emit) async {
       emit(FavoritesLoading());
       try {
-        final activity = await _ServiceProvider.fetchBooks();
+        final activity = await Service.fetchBooks();
         emit(FavoritesSuccess(favorite: activity));
       } catch (e) {
         emit(FavoritesFailed());

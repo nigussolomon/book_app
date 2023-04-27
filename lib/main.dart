@@ -1,5 +1,6 @@
 import 'package:book_app/bloc/book_bloc.dart';
 import 'package:book_app/bloc/download_bloc.dart';
+import 'package:book_app/bloc/favorites_bloc.dart';
 import 'package:book_app/bloc/search_bloc.dart';
 import 'package:book_app/pages/Home.dart';
 import 'package:book_app/pages/download_history.dart';
@@ -20,7 +21,7 @@ import 'pages/add_book.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  //Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SearchBloc(),
         ),
+        BlocProvider(
+          create: (context) => FavoritesBloc(),
+        )
       ],
       child: MaterialApp(
         initialRoute: 'splash',
@@ -78,9 +82,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5)).then((value) {
+    Future.delayed(const Duration(seconds: 1)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => const AuthCheck(),
+        builder: (BuildContext context) => HomePage(),
       ));
     });
   }
@@ -94,30 +98,32 @@ class _HomeState extends State<Home> {
         child: Center(
           child: SizedBox(
             width: double.infinity,
-            child: Column(children: [
-              // Image(image: AssetImage('assets/Book.svg')),
-              SvgPicture.asset(
-                "assets/Book.svg",
-                color: Colors.white,
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              const Text(
-                "BOOK APP",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700),
-              ),
-              const Text(
-                "by AKNY",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w200),
-              )
-            ]),
+            child: Column(
+              children: [
+                // Image(image: AssetImage('assets/Book.svg')),
+                SvgPicture.asset(
+                  "assets/Book.svg",
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Text(
+                  "BOOK APP",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700),
+                ),
+                const Text(
+                  "by AKNY",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w200),
+                )
+              ],
+            ),
           ),
         ),
       ),
