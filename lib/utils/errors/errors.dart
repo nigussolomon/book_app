@@ -1,6 +1,8 @@
 class NoBooksException implements Exception {
   String message;
   NoBooksException(this.message);
+
+  get msg => message;
 }
 
 class FailedToLoadBooksError implements Exception {

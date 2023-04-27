@@ -17,6 +17,10 @@ class BookSuccess extends BookState {
   const BookSuccess({required this.book});
 }
 
-class BookFailed extends BookState {}
+class BookFailed extends BookState {
+  final String msg;
+
+  const BookFailed({required this.msg});
+}
 
 class BookEmpty extends BookState {}

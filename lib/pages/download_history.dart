@@ -29,6 +29,7 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
             BlocProvider.of<DownloadBloc>(context).add(History());
           }
           if (state is DownloadSuccess) {
+            print(state.history);
             return Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -61,9 +62,9 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(5),
                                       child: Hero(
-                                        tag: "book tag",
+                                        tag: "book tag $index",
                                         child: Image.network(
-                                          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.n-GYj4PuriTRbbExR10xsgHaHa%26pid%3DApi&f=1&ipt=e872127db6fd44a6b9f9212500ce4e5bee1367785b01b0c5eec9340f81056a38&ipo=images",
+                                          "https://book-api-lksx.onrender.com/images/${his['id']}",
                                           fit: BoxFit.cover,
                                           width: 80,
                                           height: 100,
@@ -87,15 +88,15 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
                                                   fontSize: 18,
                                                 ),
                                               ),
-                                              Text(his["author"],
+                                              Text(his["author_name"],
                                                   style: TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.grey)),
                                             ],
                                           ),
-                                          const Text(
-                                            "description description",
-                                            style: TextStyle(
+                                          Text(
+                                            his['description'],
+                                            style: const TextStyle(
                                               color: Colors.grey,
                                               fontWeight: FontWeight.normal,
                                               overflow: TextOverflow.ellipsis,

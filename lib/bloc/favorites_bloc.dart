@@ -14,7 +14,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     on<FavoritesFetchEvent>((event, emit) async {
       emit(FavoritesLoading());
       try {
-        final activity = await Service.fetchBooks();
+        final activity = await Service.favoriteBooks();
         emit(FavoritesSuccess(favorite: activity));
       } catch (e) {
         emit(FavoritesFailed());

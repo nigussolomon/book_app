@@ -118,17 +118,29 @@ class Service {
 
     final response = await request.send();
     final responseString = await response.stream.bytesToString();
+    print(responseString);
+    return responseString;
+  }
+
+  static Future likeBook(int book_id) async {
+    final url = Uri.parse('https://book-api-lksx.onrender.com/favourites/');
+    final request = http.MultipartRequest('POST', url);
+    request.fields['user_id'] = _user!.uid;
+    request.fields['book_id'] = book_id.toString();
+    final response = await request.send();
+    final responseString = await response.stream.bytesToString();
+    print(responseString);
     return responseString;
   }
 
   static Future favoriteBooks() async {
-    final response = await http
-        .get(Uri.parse('https://book-api-lksx.onrender.com/favourites'));
+    final response = await http.get(Uri.parse(
+        'https://book-api-lksx.onrender.com/favourites/${_user?.uid}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<Book> books = [];
+      final List books = [];
       for (var book in data) {
-        books.add(Book.fromJson(book));
+        books.add(book);
       }
       return books;
     } else {

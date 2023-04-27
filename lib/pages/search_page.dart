@@ -48,10 +48,8 @@ class _SearchPageState extends State<SearchPage> {
             );
           } else if (state is SearchLoadingState) {
             // print("loading state");
-            return const Expanded(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
+            return Center(
+              child: CircularProgressIndicator(),
             );
           } else if (state is SearchSuccessState) {
             return Container(
@@ -112,7 +110,6 @@ class _SearchPageState extends State<SearchPage> {
           }
         },
       ),
-      bottomNavigationBar: const BottomBar(index: 1),
     );
   }
 }

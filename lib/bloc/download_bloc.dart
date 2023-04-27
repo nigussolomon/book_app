@@ -78,6 +78,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
           history.add(element);
         }
       }
+      print(history);
       emit(DownloadSuccess(downloaded: true, path: '', history: history));
     });
   }

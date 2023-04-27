@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           } else if (state is BookFailed) {
-            return const Center(child: Text("failed to fetch books"));
+            return Center(child: Text(state.msg));
           }
           return Container();
         },
@@ -212,7 +212,7 @@ Widget searchText(
       suffixIcon: const Icon(Icons.search_outlined, color: Colors.blue),
     ),
     onTap: () {
-      Navigator.popAndPushNamed(context, "/searcResult");
+      Navigator.pushNamed(context, "/searcResult");
     },
   );
 }

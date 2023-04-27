@@ -45,7 +45,7 @@ class ItemCard extends StatelessWidget {
                       height: 100,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             items[index]!.bookName,
@@ -59,12 +59,12 @@ class ItemCard extends StatelessWidget {
                           ),
                           Text(
                             items[index]!.authorName,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.blueAccent,
                               fontWeight: FontWeight.w500,
-                              decoration: TextDecoration.underline,
-                              decorationStyle: TextDecorationStyle.solid,
                             ),
                           ),
                           Text(

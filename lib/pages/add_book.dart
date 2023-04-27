@@ -51,7 +51,7 @@ class _AddBookState extends State<AddBook> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * .45,
+                  width: MediaQuery.of(context).size.width * .4,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
@@ -84,7 +84,7 @@ class _AddBookState extends State<AddBook> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width * .45,
+                  width: MediaQuery.of(context).size.width * .4,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       borderRadius:
@@ -141,6 +141,7 @@ class _AddBookState extends State<AddBook> {
                 padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
                 child: ElevatedButton(
                   onPressed: () {
+                    print("object");
                     Service.uploadbook(
                       result!.files[0].path,
                       note.text,

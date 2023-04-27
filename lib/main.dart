@@ -28,7 +28,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  get book => null;
+  // get book => null;
 
   // This widget is the root of your application.
   @override
@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
     super.initState();
     Future.delayed(const Duration(seconds: 1)).then((value) {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (BuildContext context) => HomePage(),
+        builder: (BuildContext context) => const AuthCheck(),
       ));
     });
   }
