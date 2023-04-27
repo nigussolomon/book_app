@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/top_bar.dart';
+import '../data/Api_service.dart';
 
 class AddBook extends StatefulWidget {
   const AddBook({super.key});
@@ -18,6 +20,7 @@ class _AddBookState extends State<AddBook> {
 
   @override
   Widget build(BuildContext context) {
+    final User? _user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
@@ -131,7 +134,15 @@ class _AddBookState extends State<AddBook> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Service.uploadbook(
+                      result!.files[0].path,
+                      note.text,
+                      _user!.email!.split('@')[0],
+                      desc.text,
+                      img!.files[0].path,
+                    );
+                  },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromARGB(255, 91, 180, 253)),

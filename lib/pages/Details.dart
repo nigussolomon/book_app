@@ -36,24 +36,24 @@ class DetailsScreen extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * .4,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         colorFilter:
                             ColorFilter.mode(Colors.black54, BlendMode.darken),
                         image: NetworkImage(
-                            'https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'),
+                            "https://book-api-lksx.onrender.com/images/${book21.id}"),
                       )),
                   child: Container(
                     margin: const EdgeInsets.symmetric(
                         horizontal: 100, vertical: 50),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         image: DecorationImage(
                           fit: BoxFit.fill,
                           image: NetworkImage(
-                              'https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'),
+                              "https://book-api-lksx.onrender.com/images/${book21.id}"),
                         )),
                   ),
                 ),
@@ -70,8 +70,8 @@ class DetailsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Lorem ipsum dolor sit amet consectetur. Imperdiet in turpis netus enim aliquam nullam nunc. Quam blandit mattis mauris feugiat senectus sit sit pulvinar leo. Nibh risus risus faucibus suspendisse orci ut hendrerit cursus. Volutpat lacus morbi morbi metus volutpat sed urna aliquam.",
+                Text(
+                  book21.desc,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

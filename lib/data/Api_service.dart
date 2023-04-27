@@ -8,8 +8,8 @@ import 'dart:convert';
 import 'package:book_app/utils/errors/errors.dart';
 
 class Service {
-  //static final User? _user = FirebaseAuth.instance.currentUser;
-  static final User? _user = null;
+  static final User? _user = FirebaseAuth.instance.currentUser;
+  // static final User? _user = null;
 
   static Future<List<Book>> fetchBooks() async {
     final response =
@@ -92,6 +92,33 @@ class Service {
       //print(response.body);
       throw Exception("failed to search books");
     }
+  }
+
+  static Future uploadbook(String? path, String title, String author,
+      String description, String? path2) async {
+    final url = Uri.parse('https://book-api-lksx.onrender.com/books');
+    final file = File(path!);
+    final img = File(path2!);
+    final request = http.MultipartRequest('POST', url);
+    final fileStream = http.ByteStream(file.openRead());
+    final imageStream = http.ByteStream(img.openRead());
+    final imageLength = await img.length();
+    final fileLength = await file.length();
+    final multipartFile = http.MultipartFile('bookfile', fileStream, fileLength,
+        filename: file.path.split('/').last);
+    final multipartImage = http.MultipartFile(
+        'image_url', imageStream, imageLength,
+        filename: file.path.split('/').last);
+    request.files.add(multipartFile);
+    request.files.add(multipartImage);
+    request.fields['bookname'] = title;
+    request.fields['author_name'] = author;
+    request.fields['authorid'] = _user!.uid;
+    request.fields['description'] = description;
+
+    final response = await request.send();
+    final responseString = await response.stream.bytesToString();
+    return responseString;
   }
 
   static Future favoriteBooks() async {
