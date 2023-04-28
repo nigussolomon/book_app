@@ -1,28 +1,12 @@
-import 'dart:async';
-import 'dart:io';
-
+import 'package:alh_pdf_view/lib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path_provider/path_provider.dart';
 
-import '../data/Api_service.dart';
-
-class PDFScreen extends StatefulWidget {
+class AlhPdfViewExample extends StatelessWidget {
   final String? path;
-
-  PDFScreen({Key? key, this.path}) : super(key: key);
-
-  _PDFScreenState createState() => _PDFScreenState();
-}
-
-class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
-  final Completer<PDFViewController> _controller =
-      Completer<PDFViewController>();
-  int? pages = 0;
-  int? currentPage = 0;
-  bool isReady = false;
-  String errorMessage = '';
-  IconData icData = Icons.dark_mode;
+  final String book_name;
+  const AlhPdfViewExample(
+      {Key? key, required this.path, required this.book_name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,63 +16,13 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: null,
+        title: Text(book_name),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          PDFView(
-            filePath: widget.path,
-            enableSwipe: true,
-            swipeHorizontal: false,
-            autoSpacing: false,
-            pageFling: false,
-            pageSnap: false,
-            defaultPage: currentPage!,
-            fitPolicy: FitPolicy.WIDTH,
-            preventLinkNavigation:
-                false, // if set to true the link is handled in flutter
-            onRender: (_pages) {
-              setState(() {
-                pages = _pages;
-                isReady = true;
-              });
-            },
-            onError: (error) {
-              setState(() {
-                errorMessage = error.toString();
-              });
-              print(error.toString());
-            },
-            onPageError: (page, error) {
-              setState(() {
-                errorMessage = '$page: ${error.toString()}';
-              });
-              print('$page: ${error.toString()}');
-            },
-            onViewCreated: (PDFViewController pdfViewController) {
-              _controller.complete(pdfViewController);
-            },
-            onLinkHandler: (String? uri) {
-              print('goto uri: $uri');
-            },
-            onPageChanged: (int? page, int? total) {
-              print('page change: $page/$total');
-              setState(() {
-                currentPage = page;
-              });
-            },
-          ),
-          errorMessage.isEmpty
-              ? !isReady
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Container()
-              : Center(
-                  child: Text(errorMessage),
-                )
-        ],
+      body: AlhPdfView(
+        showScrollbar: true,
+        fitEachPage: true,
+        swipeHorizontal: true,
+        filePath: path,
       ),
     );
   }

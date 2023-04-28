@@ -26,6 +26,7 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -104,7 +105,9 @@ class _SigninState extends State<Signin> {
                             borderRadius: BorderRadius.circular(10.0),
                           ))),
                       child: isLoading
-                          ? CircularProgressIndicator()
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
                           : Text('SIGN IN'))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

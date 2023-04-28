@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:book_app/pages/page.dart';
 import 'package:book_app/pages/pdfViewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,7 @@ class DetailsScreen extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         colorFilter:
-                            ColorFilter.mode(Colors.black54, BlendMode.darken),
+                            ColorFilter.mode(Colors.black87, BlendMode.darken),
                         image: NetworkImage(
                             "https://book-api-b.onrender.com/images/${book21.id}"),
                       )),
@@ -51,7 +52,7 @@ class DetailsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         image: DecorationImage(
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           image: NetworkImage(
                               "https://book-api-b.onrender.com/images/${book21.id}"),
                         )),
@@ -133,7 +134,11 @@ class DetailsScreen extends StatelessWidget {
                                       Navigator.of(context)
                                           .pushReplacement(MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            PDFScreen(path: state.path),
+                                            AlhPdfViewExample(
+                                          path: state.path,
+                                          book_name:
+                                              "${book21.bookName}, ${book21.authorName}",
+                                        ),
                                       ));
                                     },
                                     icon: const Icon(Icons.menu_book_rounded),

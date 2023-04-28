@@ -39,6 +39,7 @@ class _AddBookState extends State<AddBook> {
   Widget build(BuildContext context) {
     final User? _user = FirebaseAuth.instance.currentUser;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: TopBar(),
@@ -205,27 +206,17 @@ class _AddBookState extends State<AddBook> {
                         desc.text,
                         _image.path,
                       ).then((value) => {
-                            print("hhh" + value),
-                            if (value == null)
-                              {
-                                setState(() {
-                                  isLoading = false;
-                                }),
-                                Fluttertoast.showToast(
-                                    msg: "SUCCESS",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0),
-                              }
-                            else
-                              {
-                                setState(() {
-                                  isLoading = false;
-                                })
-                              }
+                            setState(() {
+                              isLoading = false;
+                            }),
+                            Fluttertoast.showToast(
+                                msg: "SUCCESS",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0),
                           });
                     } catch (e) {
                       Fluttertoast.showToast(
