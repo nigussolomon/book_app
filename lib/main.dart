@@ -115,15 +115,24 @@ class _HomeState extends State<Home> {
           child: SizedBox(
             width: double.infinity,
             child: Column(
-              children: const [
-                Text(
+              children: [
+                SvgPicture.asset(
+                  "assets/Book.svg",
+                  color: Colors.white,
+                  height: 120,
+                  width: 120,
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Text(
                   "BOOK APP",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.w700),
                 ),
-                Text(
+                const Text(
                   "by AKNY",
                   style: TextStyle(
                       color: Colors.white,
