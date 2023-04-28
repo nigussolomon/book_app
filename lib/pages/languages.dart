@@ -20,9 +20,9 @@ class languageScreen extends StatelessWidget {
             title: LocaleText('english'),
           ),
           ListTile(
-              title: const LocaleText('amharic'),
+              title: LocaleText('amharic'),
               onTap: () => Locales.change(context, 'am')),
-          LocaleText('current_language_is: ' +
+          Text('current_language_is: ' +
               Locales.currentLocale(context)!.languageCode),
           // Text('Current Locale: ' + context.currentLocale.languageCode), // with Extension
         ],
