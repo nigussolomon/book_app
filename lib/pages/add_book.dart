@@ -206,15 +206,29 @@ class _AddBookState extends State<AddBook> {
                         desc.text,
                         _image.path,
                       ).then((value) => {
+                            if (value['message'] != null)
+                              {
+                                setState(() {
+                                  isLoading = false;
+                                }),
+                                Fluttertoast.showToast(
+                                    msg: "SUCCESS",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0),
+                              },
                             setState(() {
                               isLoading = false;
                             }),
                             Fluttertoast.showToast(
-                                msg: "SUCCESS",
+                                msg: "BOOK EXISTS",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.green,
+                                backgroundColor: Colors.red,
                                 textColor: Colors.white,
                                 fontSize: 16.0),
                           });
@@ -239,8 +253,14 @@ class _AddBookState extends State<AddBook> {
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7.0),
                       ))),
-                  child:
-                      isLoading ? CircularProgressIndicator() : Text('SIGN IN'),
+                  child: isLoading
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text(
+                          'UPLOAD BOOK',
+                          style: TextStyle(color: Colors.white),
+                        ),
                 )),
           ],
         ),

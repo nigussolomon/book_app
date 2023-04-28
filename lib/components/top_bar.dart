@@ -11,12 +11,16 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: Icon(Icons.book),
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       elevation: 0,
-      title: const LocaleText(
-        "bookapp",
-        style: TextStyle(color: Colors.black),
+      title: Transform.translate(
+        offset: const Offset(-25.0, 0.0),
+        child: const LocaleText(
+          "bookapp",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       actions: [
         IconButton(

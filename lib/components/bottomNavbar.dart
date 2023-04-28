@@ -17,6 +17,7 @@ class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
   List routes = [Routes.home, Routes.downloadHistory, Routes.favourites];
+  List colors = [Colors.black, Colors.green, Colors.red];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,34 +32,24 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     _selectedIndex = widget.index;
-
     return BottomNavigationBar(
-      selectedItemColor: Colors.black87,
+      selectedItemColor: colors[_selectedIndex],
       backgroundColor: Colors.white,
       elevation: 50,
       type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: Locales.string(context, "home"),
-            activeIcon: Icon(
-              Icons.home_filled,
-              color: Colors.grey,
-            )),
+          icon: Icon(Icons.home),
+          label: Locales.string(context, "home"),
+        ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: Locales.string(context, 'history'),
-            activeIcon: Icon(
-              Icons.history_toggle_off,
-              color: Colors.green,
-            )),
+          icon: Icon(Icons.history),
+          label: Locales.string(context, 'history'),
+        ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: Locales.string(context, 'favourites'),
-            activeIcon: Icon(
-              Icons.favorite,
-              color: Colors.red,
-            )),
+          icon: Icon(Icons.favorite),
+          label: Locales.string(context, 'favourites'),
+        ),
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

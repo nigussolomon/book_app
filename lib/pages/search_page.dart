@@ -11,17 +11,20 @@ import 'package:book_app/bloc/search_state.dart';
 import 'package:book_app/bloc/search_event.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final String searchTitle;
+  const SearchPage({super.key, required this.searchTitle});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _searchController =
+        TextEditingController(text: widget.searchTitle);
+    BlocProvider.of<SearchBloc>(context)
+        .add(SubmitSearchEvent(_searchController.text));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,

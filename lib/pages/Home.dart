@@ -1,4 +1,5 @@
 import "package:book_app/data/book.dart";
+import "package:book_app/pages/search_page.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_locales/flutter_locales.dart";
@@ -74,16 +75,31 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Hero(
-                                tag: "book tag + $index",
-                                child: Image.network(
-                                  "https://book-api-b.onrender.com/images/${book.id}",
-                                  fit: BoxFit.contain,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                      book21: state.book[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Hero(
+                                  tag: "book tag + $index",
+                                  child: Image.network(
+                                    "https://book-api-b.onrender.com/images/${book.id}",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
+                            const SizedBox(
+                              width: 10,
+                            )
                           ],
                         );
                       },
@@ -122,9 +138,8 @@ Widget bookGrid(BookSuccess state) {
       itemCount: state.book.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 20,
-        childAspectRatio: 0.4,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 0.65,
       ),
       itemBuilder: (context, index) {
         Book book = state.book[index];
@@ -147,7 +162,7 @@ Widget bookGrid(BookSuccess state) {
                 height: 160,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(12),
+                    Radius.circular(4),
                   ),
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -206,15 +221,24 @@ Widget searchText(
   return TextField(
     controller: searchController,
     decoration: InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      hintText: Locales.string(context, 'searchbookshere'),
-      suffixIcon: const Icon(Icons.search_outlined, color: Colors.blue),
-    ),
-    onTap: () {
-      Navigator.pushNamed(context, "/searcResult");
-    },
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        hintText: Locales.string(context, 'searchbookshere'),
+        suffixIcon: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchPage(
+                  searchTitle: searchController.text,
+                ),
+              ),
+            );
+          },
+          icon: const Icon(Icons.search_outlined),
+        )),
   );
 }

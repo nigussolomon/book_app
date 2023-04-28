@@ -84,21 +84,21 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Column(
-                                            children: [
-                                              Text(
-                                                his["bookname"],
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                ),
-                                              ),
-                                              Text(his["author_name"],
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.grey)),
-                                            ],
+                                          Text(
+                                            his["bookname"],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          Text(his["author_name"],
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey)),
+                                          SizedBox(
+                                            height: 15,
                                           ),
                                           Text(
                                             his['description'],

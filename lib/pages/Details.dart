@@ -82,13 +82,12 @@ class DetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton.icon(
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(50, 50),
                           backgroundColor: Colors.red),
                       onPressed: () {},
-                      icon: const Icon(Icons.thumb_up),
-                      label: const Text("LIKE"),
+                      child: const Icon(Icons.favorite),
                     ),
                     state is DownloadInitial
                         ? ElevatedButton.icon(

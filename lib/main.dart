@@ -72,7 +72,6 @@ class MyApp extends StatelessWidget {
             Routes.profile: (context) => const ProfilePage(),
             Routes.downloadHistory: (context) => const DownloadHistoryPage(),
             Routes.favourites: (context) => const FavoritesPage(),
-            Routes.searchResult: (context) => const SearchPage(),
             Routes.addBook: (context) => const AddBook(),
             Routes.language: (context) => const languageScreen(),
           },

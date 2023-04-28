@@ -30,6 +30,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
             book_id: event.bookVal.id, user_id: event.bookVal.authorId);
         sl.savedownload(local);
         print(file.path);
+        await Future.delayed(const Duration(seconds: 3));
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
@@ -42,7 +43,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
       try {
         final appDir = await getExternalStorageDirectory();
         final file = File('${appDir?.path}/${event.bookVal.bookName}');
-        print(file.path);
+        await Future.delayed(const Duration(seconds: 3));
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
