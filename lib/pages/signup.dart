@@ -134,19 +134,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-                child: TextFormField(
-                  controller: userNameController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.elliptical(7, 7))),
-                      hintText: 'Enter your name',
-                      labelText: "Username"),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(

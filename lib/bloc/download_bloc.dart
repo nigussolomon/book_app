@@ -29,6 +29,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
         final local = Download(
             book_id: event.bookVal.id, user_id: event.bookVal.authorId);
         sl.savedownload(local);
+        print(file.path);
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
@@ -41,7 +42,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
       try {
         final appDir = await getExternalStorageDirectory();
         final file = File('${appDir?.path}/${event.bookVal.bookName}');
-
+        print(file.path);
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
@@ -52,31 +53,29 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
     on<CheckDownload>((event, emit) async {
       emit(DownloadLoading());
       bool pass = false;
-      List myDowns = [];
       await sl.readdownload().then((val) => {
-            if (val != []) {myDowns = val}
+            print(val),
+            for (var element in val)
+              {
+                if (element['book_id'] == event.data.id)
+                  {
+                    pass = true,
+                  }
+              }
           });
-      if (myDowns != []) {
-        for (var ele in myDowns) {
-          if (ele['book_id'] == event.data.id) {
-            pass = true;
-            try {
-              final appDir = await getExternalStorageDirectory();
-              final file = File('${appDir?.path}/${event.data.bookName}');
 
-              emit(DownloadSuccess(
-                  downloaded: true, path: file.path, history: history));
-            } catch (e) {
-              emit(DownloadInitial());
-            }
-          }
-        }
+      if (pass == false) {
+        emit(DownloadInitial());
+      } else {
+        try {
+          final appDir = await getExternalStorageDirectory();
+          final file = File('${appDir?.path}/${event.data.bookName}');
 
-        if (pass == false) {
+          emit(DownloadSuccess(
+              downloaded: true, path: file.path, history: history));
+        } catch (e) {
           emit(DownloadInitial());
         }
-      } else {
-        emit(DownloadInitial());
       }
     });
 

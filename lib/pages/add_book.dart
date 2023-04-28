@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../components/top_bar.dart';
 import '../data/Api_service.dart';
@@ -19,6 +22,18 @@ class _AddBookState extends State<AddBook> {
   FilePickerResult? result;
   FilePickerResult? img;
   bool isLoading = false;
+  File _image = File('');
+  final _picker = ImagePicker();
+
+  Future<void> pickUploadProfilePic(
+    ImageSource source,
+  ) async {
+    final XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+      _image = File(image.path);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,23 +109,58 @@ class _AddBookState extends State<AddBook> {
                   child: Column(
                     children: [
                       const Text("Selected Image"),
-                      Text(img?.files[0].name ?? '',
+                      Text(_image.path,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       IconButton(
                           onPressed: () async {
-                            img = await FilePicker.platform
-                                .pickFiles(allowMultiple: true);
-                            if (img == null) {
-                              print("No file selected");
-                            } else {
-                              setState(() {});
-                              img?.files.forEach((element) {
-                                print(element.name);
-                              });
-                            }
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SimpleDialog(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    pickUploadProfilePic(
+                                                        ImageSource.gallery);
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  Icons.image,
+                                                )),
+                                            Text("GALLERY")
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    pickUploadProfilePic(
+                                                        ImageSource.camera);
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  Icons.camera,
+                                                )),
+                                            Text("CAMERA")
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                );
+                              },
+                            );
                           },
                           icon: const Icon(Icons.upload)),
                     ],
@@ -153,10 +203,10 @@ class _AddBookState extends State<AddBook> {
                         note.text,
                         _user!.email!.split('@')[0],
                         desc.text,
-                        img!.files[0].path,
+                        _image.path,
                       ).then((value) => {
                             print("hhh" + value),
-                            if (value['detail'] == null)
+                            if (value == null)
                               {
                                 setState(() {
                                   isLoading = false;
