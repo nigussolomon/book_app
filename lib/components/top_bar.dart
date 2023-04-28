@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 import '../bloc/book_bloc.dart';
 import '../resources/routes.dart';
@@ -13,8 +14,8 @@ class TopBar extends StatelessWidget {
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       elevation: 0,
-      title: const Text(
-        "BOOK APP",
+      title: const LocaleText(
+        "bookapp",
         style: TextStyle(color: Colors.black),
       ),
       actions: [
@@ -35,7 +36,16 @@ class TopBar extends StatelessWidget {
             Icons.refresh,
             color: Colors.black,
           ),
-        )
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.language);
+          },
+          icon: const Icon(
+            Icons.language,
+            color: Colors.black,
+          ),
+        ),
       ],
     );
   }

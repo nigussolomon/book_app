@@ -8,4 +8,5 @@ class Routes {
   static const String details = "/details";
   static const String searchResult = "/searcResult";
   static const String addBook = "/addBook";
+  static const String language = "/language";
 }

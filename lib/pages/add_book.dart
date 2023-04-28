@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../components/top_bar.dart';
 import '../data/Api_service.dart';
@@ -17,6 +18,7 @@ class _AddBookState extends State<AddBook> {
   final TextEditingController desc = TextEditingController();
   FilePickerResult? result;
   FilePickerResult? img;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -140,15 +142,54 @@ class _AddBookState extends State<AddBook> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
                 child: ElevatedButton(
-                  onPressed: () {
-                    print("object");
-                    Service.uploadbook(
-                      result!.files[0].path,
-                      note.text,
-                      _user!.email!.split('@')[0],
-                      desc.text,
-                      img!.files[0].path,
-                    );
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    try {
+                      final res = await Service.uploadbook(
+                        result!.files[0].path,
+                        note.text,
+                        _user!.email!.split('@')[0],
+                        desc.text,
+                        img!.files[0].path,
+                      ).then((value) => {
+                            print("hhh" + value),
+                            if (value['detail'] == null)
+                              {
+                                setState(() {
+                                  isLoading = false;
+                                }),
+                                Fluttertoast.showToast(
+                                    msg: "SUCCESS",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0),
+                              }
+                            else
+                              {
+                                setState(() {
+                                  isLoading = false;
+                                })
+                              }
+                          });
+                    } catch (e) {
+                      Fluttertoast.showToast(
+                          msg: "Something went wrong!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -157,7 +198,8 @@ class _AddBookState extends State<AddBook> {
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7.0),
                       ))),
-                  child: const Text("ADD BOOK"),
+                  child:
+                      isLoading ? CircularProgressIndicator() : Text('SIGN IN'),
                 )),
           ],
         ),

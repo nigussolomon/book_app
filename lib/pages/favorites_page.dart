@@ -1,6 +1,7 @@
 import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import '../bloc/favorites_bloc.dart';
 import '../components/item_card.dart';
 import '../components/top_bar.dart';
@@ -26,7 +27,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
           if (state is FavoritesInitial) {
             BlocProvider.of<FavoritesBloc>(context).add(FavoritesFetchEvent());
           }
-          if (state is FavoritesLoading) {}
+          if (state is FavoritesLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           if (state is FavoritesSuccess) {
             return Container(
               width: MediaQuery.of(context).size.width,
@@ -36,9 +41,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
               padding: const EdgeInsets.all(4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Favourites",
+                children: [
+                  LocaleText(
+                    "favourites",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(

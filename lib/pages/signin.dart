@@ -13,6 +13,7 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   bool passwordVisible = false;
+  bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -66,35 +67,45 @@ class _SigninState extends State<Signin> {
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                   child: ElevatedButton(
-                    onPressed: () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text)
-                          .then((value) {
-                        Navigator.of(context).popAndPushNamed(Routes.home);
-                      }).onError((error, stackTrace) {
-                        print("Error ${error.toString()}");
-                        Fluttertoast.showToast(
-                            msg: error.toString(),
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                      });
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: const MaterialStatePropertyAll(
-                            Color.fromARGB(255, 91, 180, 253)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ))),
-                    child: const Text("Continue"),
-                  )),
+                      onPressed: () {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text)
+                            .then((value) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.of(context).popAndPushNamed(Routes.home);
+                        }).onError((error, stackTrace) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          print("Error ${error.toString()}");
+                          Fluttertoast.showToast(
+                              msg: error.toString(),
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: const MaterialStatePropertyAll(
+                              Color.fromARGB(255, 91, 180, 253)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ))),
+                      child: isLoading
+                          ? CircularProgressIndicator()
+                          : Text('SIGN IN'))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

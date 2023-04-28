@@ -1,5 +1,6 @@
 import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 import '../components/item_card.dart';
 import '../components/top_bar.dart';
@@ -123,7 +124,7 @@ Widget searchText(
         borderRadius: BorderRadius.circular(4),
       ),
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      hintText: 'Search Books here..',
+      hintText: Locales.string(context, 'searchbookshere'),
       suffixIcon: IconButton(
         icon: const Icon(Icons.search_outlined, color: Colors.blue),
         onPressed: () {

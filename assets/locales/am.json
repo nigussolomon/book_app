@@ -1,0 +1,23 @@
+{"localization":"Localization",
+"home" : "መግቢያ",
+"signin":"ግቢ",
+"nobooks":"ምንም መጽሐፍት የለም",
+"username":"የተጠቃሚ ስም",
+"bookapp":"የመጽሐፍ መተግበሪያ",
+"history":"ታሪክ",
+"favourites":"ተወዳጆች",
+"downloads":"የተጫኑ",
+"searchbookshere":"መጽሐፍትን እዚህ ይፈልጉ",
+"something went wrong":"የሆነ ስህተት ተከስቷል",
+"addbook":"መጽሐፍ ያክሉ",
+"language":"ቋንቋ",
+"english":"እንግሊዝኛ",
+"french":"ፈረንሳይኛ",
+"enteryourname":"ስምህን አስገባ",
+"name":"ስም",
+"signup":"",
+"password":""
+
+
+
+}

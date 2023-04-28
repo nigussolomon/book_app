@@ -1,6 +1,7 @@
 import "package:book_app/data/book.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_locales/flutter_locales.dart";
 import "../bloc/book_bloc.dart";
 import "../components/bottomNavbar.dart";
 import "../components/top_bar.dart";
@@ -77,7 +78,7 @@ class HomePage extends StatelessWidget {
                               child: Hero(
                                 tag: "book tag + $index",
                                 child: Image.network(
-                                  "https://book-api-lksx.onrender.com/images/${book.id}",
+                                  "https://book-api-b.onrender.com/images/${book.id}",
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -102,7 +103,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           } else if (state is BookFailed) {
-            return Center(child: Text(state.msg));
+            return Center(child: LocaleText(state.msg));
           }
           return Container();
         },
@@ -150,7 +151,7 @@ Widget bookGrid(BookSuccess state) {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      'https://book-api-lksx.onrender.com/images/${book.id}',
+                      'https://book-api-b.onrender.com/images/${book.id}',
                     ),
                   ),
                 ),
@@ -208,7 +209,7 @@ Widget searchText(
         borderRadius: BorderRadius.circular(4),
       ),
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      hintText: 'Search Books here..',
+      hintText: Locales.string(context, 'searchbookshere'),
       suffixIcon: const Icon(Icons.search_outlined, color: Colors.blue),
     ),
     onTap: () {

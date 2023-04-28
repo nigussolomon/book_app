@@ -15,7 +15,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         final bookapi = await Service.fetchBooks();
         emit(BookSuccess(book: bookapi));
       } catch (e) {
-        emit(BookFailed(msg: "NO BOOKS FOUND"));
+        emit(BookFailed(msg: "nobooks"));
       }
     });
   }

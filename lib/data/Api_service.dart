@@ -13,7 +13,7 @@ class Service {
 
   static Future<List<Book>> fetchBooks() async {
     final response =
-        await http.get(Uri.parse('https://book-api-lksx.onrender.com/books'));
+        await http.get(Uri.parse('https://book-api-b.onrender.com/books'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       if (data["boooks"] == "No boooks found") {
@@ -37,8 +37,7 @@ class Service {
       'bookname': param,
       'authorname': param,
     };
-    var uri =
-        Uri.https('book-api-lksx.onrender.com', '/search', queryParameters);
+    var uri = Uri.https('book-api-b.onrender.com', '/search', queryParameters);
     var response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -58,7 +57,7 @@ class Service {
 
   static Future downloadBook(int bookid) async {
     final response = await http.post(Uri.parse(
-        'https://book-api-lksx.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
+        'https://book-api-b.onrender.com/downloads?bookid=$bookid&userid=${_user!.uid}'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -69,8 +68,8 @@ class Service {
   }
 
   static Future getDownloadedBook(int downloadid, String filename) async {
-    final response = await http.get(
-        Uri.parse('https://book-api-lksx.onrender.com/download/$downloadid'));
+    final response = await http
+        .get(Uri.parse('https://book-api-b.onrender.com/download/$downloadid'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final appDir = await getExternalStorageDirectory();
@@ -83,8 +82,8 @@ class Service {
   }
 
   static Future getDownloadedBooks() async {
-    final response = await http.get(Uri.parse(
-        'https://book-api-lksx.onrender.com/downloads/${_user!.uid}'));
+    final response = await http.get(
+        Uri.parse('https://book-api-b.onrender.com/downloads/${_user!.uid}'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -96,7 +95,7 @@ class Service {
 
   static Future uploadbook(String? path, String title, String author,
       String description, String? path2) async {
-    final url = Uri.parse('https://book-api-lksx.onrender.com/books');
+    final url = Uri.parse('https://book-api-b.onrender.com/books');
     final file = File(path!);
     final img = File(path2!);
     final request = http.MultipartRequest('POST', url);
@@ -123,7 +122,7 @@ class Service {
   }
 
   static Future likeBook(int book_id) async {
-    final url = Uri.parse('https://book-api-lksx.onrender.com/favourites/');
+    final url = Uri.parse('https://book-api-b.onrender.com/favourites/');
     final request = http.MultipartRequest('POST', url);
     request.fields['user_id'] = _user!.uid;
     request.fields['book_id'] = book_id.toString();
@@ -134,8 +133,8 @@ class Service {
   }
 
   static Future favoriteBooks() async {
-    final response = await http.get(Uri.parse(
-        'https://book-api-lksx.onrender.com/favourites/${_user?.uid}'));
+    final response = await http.get(
+        Uri.parse('https://book-api-b.onrender.com/favourites/${_user?.uid}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final List books = [];

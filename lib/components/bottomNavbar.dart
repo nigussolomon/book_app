@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+import 'package:flutter_locales/flutter_locales.dart';
+
 import '../bloc/download_bloc.dart';
 import '../resources/routes.dart';
 
@@ -30,31 +31,26 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     _selectedIndex = widget.index;
-    return DotNavigationBar(
-      boxShadow: const [
-        BoxShadow(
-            color: Color.fromARGB(55, 182, 182, 182),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: Offset(1, 1))
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      elevation: 50,
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: Locales.string(context, "home"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.history),
+          label: Locales.string(context, 'history'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+          label: Locales.string(context, 'favourites'),
+        ),
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
-      // dotIndicatorColor: Colors.black,
-      items: [
-        DotNavigationBarItem(
-          icon: const Icon(Icons.home),
-          selectedColor: Colors.blueAccent,
-        ),
-        DotNavigationBarItem(
-          icon: const Icon(Icons.download_rounded),
-          selectedColor: Colors.grey,
-        ),
-        DotNavigationBarItem(
-          icon: const Icon(Icons.favorite),
-          selectedColor: Colors.red,
-        ),
-      ],
     );
   }
 }

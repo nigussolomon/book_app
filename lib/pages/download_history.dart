@@ -1,6 +1,7 @@
 import 'package:book_app/components/bottomNavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 import '../bloc/download_bloc.dart';
 import '../components/item_card.dart';
@@ -28,6 +29,11 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
           if (state is DownloadInitial) {
             BlocProvider.of<DownloadBloc>(context).add(History());
           }
+          if (state is DownloadLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           if (state is DownloadSuccess) {
             print(state.history);
             return Container(
@@ -39,8 +45,8 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Downloads",
+                  const LocaleText(
+                    'downloads',
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
@@ -64,7 +70,7 @@ class _DownloadHistoryPageState extends State<DownloadHistoryPage> {
                                       child: Hero(
                                         tag: "book tag $index",
                                         child: Image.network(
-                                          "https://book-api-lksx.onrender.com/images/${his['id']}",
+                                          "https://book-api-b.onrender.com/images/${his['id']}",
                                           fit: BoxFit.cover,
                                           width: 80,
                                           height: 100,
