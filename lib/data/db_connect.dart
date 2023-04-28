@@ -13,6 +13,6 @@ class DatabaseConnection {
 
   _onCreatingDatabase(Database database, int version) async {
     await database.execute(
-        "CREATE TABLE download(id INTEGER PRIMARY KEY ,uid TEXT, book_id iINTEGER)");
+        "CREATE TABLE download(id INTEGER PRIMARY KEY ,user_id TEXT, book_id iINTEGER)");
   }
 }

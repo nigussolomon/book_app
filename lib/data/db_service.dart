@@ -1,10 +1,10 @@
 import 'downloads.dart';
 import 'local_db.dart';
 
-class Service {
+class ServiceLocal {
   Repository? _repository;
 
-  Service() {
+  ServiceLocal() {
     _repository = Repository();
   }
 

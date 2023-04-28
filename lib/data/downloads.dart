@@ -19,8 +19,8 @@ class Download {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
-      'bookid': book_id,
-      'userid': user_id,
+      'book_id': book_id,
+      'user_id': user_id,
     };
     return data;
   }

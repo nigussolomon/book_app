@@ -14,6 +14,7 @@ import 'package:book_app/resources/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,6 +27,11 @@ void main() async {
   Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
   await Locales.init(['en', 'am']);
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) => runApp(const MyApp()));
   runApp(const MyApp());
 }
 

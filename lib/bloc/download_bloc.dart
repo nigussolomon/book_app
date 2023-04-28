@@ -1,16 +1,19 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_app/data/downloads.dart';
 import 'package:equatable/equatable.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../data/Api_service.dart';
 import '../data/book.dart';
+import '../data/db_service.dart';
 
 part 'download_event.dart';
 part 'download_state.dart';
 
 class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
+  ServiceLocal sl = ServiceLocal();
   DownloadBloc() : super(DownloadInitial()) {
     // String path = '';
     List history = [];
@@ -23,6 +26,9 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
         }
         final appDir = await getExternalStorageDirectory();
         final file = File('${appDir?.path}/${event.bookVal.bookName}');
+        final local = Download(
+            book_id: event.bookVal.id, user_id: event.bookVal.authorId);
+        sl.savedownload(local);
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
@@ -35,6 +41,7 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
       try {
         final appDir = await getExternalStorageDirectory();
         final file = File('${appDir?.path}/${event.bookVal.bookName}');
+
         emit(DownloadSuccess(
             downloaded: true, path: file.path, history: history));
       } catch (e) {
@@ -45,14 +52,18 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
     on<CheckDownload>((event, emit) async {
       emit(DownloadLoading());
       bool pass = false;
-      final downloadId = await Service.getDownloadedBooks();
-      if (downloadId["downloads"] != "No downloads found") {
-        for (var element in downloadId["downloads"]) {
-          if (element["bookname"] == event.data.bookName) {
+      List myDowns = [];
+      await sl.readdownload().then((val) => {
+            if (val != []) {myDowns = val}
+          });
+      if (myDowns != []) {
+        for (var ele in myDowns) {
+          if (ele['book_id'] == event.data.id) {
             pass = true;
             try {
               final appDir = await getExternalStorageDirectory();
               final file = File('${appDir?.path}/${event.data.bookName}');
+
               emit(DownloadSuccess(
                   downloaded: true, path: file.path, history: history));
             } catch (e) {

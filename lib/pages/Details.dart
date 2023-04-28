@@ -43,7 +43,7 @@ class DetailsScreen extends StatelessWidget {
                         colorFilter:
                             ColorFilter.mode(Colors.black54, BlendMode.darken),
                         image: NetworkImage(
-                            "https://book-api-lksx.onrender.com/images/${book21.id}"),
+                            "https://book-api-b.onrender.com/images/${book21.id}"),
                       )),
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -53,7 +53,7 @@ class DetailsScreen extends StatelessWidget {
                         image: DecorationImage(
                           fit: BoxFit.fill,
                           image: NetworkImage(
-                              "https://book-api-lksx.onrender.com/images/${book21.id}"),
+                              "https://book-api-b.onrender.com/images/${book21.id}"),
                         )),
                   ),
                 ),
