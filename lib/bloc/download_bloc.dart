@@ -52,6 +52,10 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
     });
 
     on<CheckDownload>((event, emit) async {
+      final downloadId = await Service.getDownloadedBooks();
+      if (downloadId['downloads'] == 'No downloads found') {
+        sl.wipeDate();
+      }
       emit(DownloadLoading());
       bool pass = false;
       await sl.readdownload().then((val) => {
